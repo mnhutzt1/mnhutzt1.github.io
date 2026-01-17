@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mnhutzt</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('./images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -2;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        /* Auto-play unlock overlay */
+        .autoplay-unlock {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .autoplay-unlock.hidden {
+            display: none;
+        }
+
+        .autoplay-button {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .autoplay-button:hover {
+            background: rgba(0, 0, 0, 0.9);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: scale(1.05);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a.active {
+            background: rgba(255, 255, 255, 0.3);
+            border-bottom: 2px solid white;
+        }
+
+        /* Content Container */
+        .container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding-top: 80px;
+            padding-bottom: 40px;
+        }
+
+        .container.show {
+            display: flex;
+        }
+
+        /* Content Sections */
+        .section {
+            display: none;
+            width: 100%;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 50px 60px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        .card h2 {
+            font-size: 32px;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .card p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .card ul {
+            list-style: none;
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .card li {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 10px 0;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .card li:before {
+            content: "✨ ";
+            margin-right: 10px;
+        }
+
+        /* Social Buttons */
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .social-btn.discord {
+            background: rgba(88, 101, 242, 0.3);
+            border-color: rgba(88, 101, 242, 0.5);
+        }
+
+        .social-btn.discord:hover {
+            background: rgba(88, 101, 242, 0.5);
+        }
+
+        .social-btn.roblox {
+            background: rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .social-btn.roblox:hover {
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .social-btn.facebook {
+            background: rgba(59, 89, 152, 0.3);
+            border-color: rgba(59, 89, 152, 0.5);
+        }
+
+        .social-btn.facebook:hover {
+            background: rgba(59, 89, 152, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 20px;
+            }
+
+            .nav-menu {
+                gap: 15px;
+            }
+
+            .nav-menu a {
+                font-size: 14px;
+                padding: 6px 10px;
+            }
+
+            .card {
+                padding: 30px 40px;
+                max-width: 90%;
+            }
+
+            .card h2 {
+                font-size: 24px;
+            }
+
+            .card p, .card li {
+                font-size: 14px;
+            }
+        }
+
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 12px 20px;
+            z-index: 50;
+            min-width: 300px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: white;
+            font-size: 12px;
+        }
+
+        .player-icon {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #1DB954, #191414);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .player-text {
+            flex: 1;
+        }
+
+        .player-text .track-name {
+            color: white;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .player-text .artist-name {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 11px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .player-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .player-btn:hover {
+            color: #1DB954;
+            transform: scale(1.2);
+        }
+
+        .player-btn.play {
+            font-size: 24px;
+        }
+
+        .volume-control {
+            display: none;
+            position: absolute;
+            bottom: 50px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 15px 10px;
+            width: 40px;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .volume-control.show {
+            display: flex;
+        }
+
+        .volume-slider {
+            width: 30px;
+            height: 100px;
+            background: linear-gradient(to top, #1DB954, rgba(29, 185, 84, 0.3));
+            outline: none;
+            cursor: pointer;
+            writing-mode: vertical-lr;
+            direction: rtl;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: slider-thumb;
+            appearance: slider-thumb;
+            width: 15px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin-top: 8px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #1DB954;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 10px;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .music-player {
+                min-width: 250px;
+                bottom: 10px;
+                right: 10px;
+                padding: 10px 15px;
+            }
+
+            .player-info {
+                margin-bottom: 8px;
+            }
+
+            .player-controls {
+                gap: 10px;
+            }
+
+            .player-btn {
+                font-size: 16px;
+            }
+
+            .player-btn.play {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="title">mnhutzt</div>
+        <ul class="nav-menu">
+            <li><a class="nav-link active" data-section="home">Home</a></li>
+            <li><a class="nav-link" data-section="about">About</a></li>
+            <li><a class="nav-link" data-section="skills">Skills</a></li>
+            <li><a class="nav-link" data-section="projects">Projects</a></li>
+            <li><a class="nav-link" data-section="contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sections -->
+    <div class="container">
+        <!-- Home -->
+        <div id="home" class="section active">
+            <div class="card">
+                <h2>Welcome to mnhutzt</h2>
+                <p>Chào mừng bạn đến với trang web của tui. Tui là một người yêu thích sáng tạo và công nghệ!.</p>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div id="about" class="section">
+            <div class="card">
+                <h2>About Me</h2>
+                <p>Tui là một người đam mê công nghệ.</p>
+                <ul>
+                    <li>Phát triển ứng dụng</li>
+                    <li>Tối ưu hóa hiệu suất</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Skills -->
+        <div id="skills" class="section">
+            <div class="card">
+                <h2>My Skills</h2>
+                <ul>
+                    <li>PYTHON 10%</li>
+                    <li>Web Design & UX/UI 10%</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Projects -->
+        <div id="projects" class="section">
+            <div class="card">
+                <h2>My Projects</h2>
+                <p>Những dự án mà tôi tự hào:</p>
+                <ul>
+                    <li>Không có cái nào để tự hào</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <div id="contact" class="section">
+            <div class="card">
+                <h2>Get In Touch</h2>
+                <p>Hãy kết nối với tui tại đây:</p>
+                <div class="social-buttons">
+                    <a href="https://discord.com/users/1066597531951300658" target="_blank" class="social-btn discord">
+                        💜 Discord
+                    </a>
+                    <a href="https://www.roblox.com/users/3571024369/profile" target="_blank" class="social-btn roblox">
+                        🎮 Roblox
+                    </a>
+                    <a href="https://www.facebook.com/mnhutzt" target="_blank" class="social-btn facebook">
+                        👤 Facebook
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="time-display">
+            <span id="currentTime">0:00</span>
+            <span id="duration">0:00</span>
+        </div>
+        <div class="player-controls">
+            <button class="player-btn" id="prevBtn">⏮</button>
+            <button class="player-btn play" id="playBtn">▶</button>
+            <button class="player-btn" id="nextBtn">⏭</button>
+            <div style="position: relative;">
+                <button class="player-btn" id="volumeBtn">🔊</button>
+                <div class="volume-control" id="volumeControl">
+                    <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="70">
+                </div>
+            </div>
+        </div>
+        <audio id="audioPlayer" autoplay loop></audio>
+    </div>
+
+    <script>
+        // Danh sách nhạc (thêm file nhạc vào folder music/)
+        const playlist = [
+            { name: 'Song 1', file: './music/song1.mp3' },
+        ];
+
+        let currentTrackIndex = 0;
+        let isPlaying = false;
+
+        const audio = document.getElementById('audioPlayer');
+        const playBtn = document.getElementById('playBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const trackName = document.getElementById('trackName');
+        const artistName = document.getElementById('artistName');
+        const progressFill = document.getElementById('progressFill');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const progressBar = document.querySelector('.progress-bar');
+
+        // Volume control
+        const volumeBtn = document.getElementById('volumeBtn');
+        const volumeControl = document.getElementById('volumeControl');
+        const volumeSlider = document.getElementById('volumeSlider');
+
+        // Set initial volume
+        audio.volume = 0.7;
+
+        // Toggle volume control
+        volumeBtn.addEventListener('click', () => {
+            volumeControl.classList.toggle('show');
+        });
+
+        // Hide volume control when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.player-btn') && !e.target.closest('.volume-control')) {
+                volumeControl.classList.remove('show');
+            }
+        });
+
+        // Adjust volume
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value / 100;
+            // Change icon based on volume
+            if (e.target.value == 0) {
+                volumeBtn.textContent = '🔇';
+            } else if (e.target.value < 50) {
+                volumeBtn.textContent = '🔉';
+            } else {
+                volumeBtn.textContent = '🔊';
+            }
+        });
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.section');
+        const container = document.querySelector('.container');
+
+        // Load track
+        function loadTrack(index) {
+            if (playlist[index]) {
+                audio.src = playlist[index].file;
+                currentTrackIndex = index;
+            }
+        }
+
+        // Auto load and play first track
+        function startAutoPlay() {
+            loadTrack(0);
+            audio.volume = 0.7;
+            audio.play().then(() => {
+                playBtn.textContent = '⏸';
+                isPlaying = true;
+            }).catch(err => {
+                console.log('Autoplay blocked by browser');
+            });
+        }
+
+        // Load track immediately
+        loadTrack(0);
+        
+        // Auto play when page loads
+        window.addEventListener('load', () => {
+            audio.volume = 0.7;
+            audio.play().then(() => {
+                playBtn.textContent = '⏸';
+                isPlaying = true;
+            }).catch(err => {
+                console.log('Autoplay blocked:', err);
+            });
+        });
+
+        // Play/Pause
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playBtn.textContent = '▶';
+                isPlaying = false;
+            } else {
+                if (!audio.src) loadTrack(0);
+                audio.play();
+                playBtn.textContent = '⏸';
+                isPlaying = true;
+            }
+        });
+
+        // Next Track
+        nextBtn.addEventListener('click', () => {
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+            loadTrack(currentTrackIndex);
+            if (isPlaying) audio.play();
+        });
+
+        // Previous Track
+        prevBtn.addEventListener('click', () => {
+            currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+            loadTrack(currentTrackIndex);
+            if (isPlaying) audio.play();
+        });
+
+        // Update progress bar và duration
+        audio.addEventListener('timeupdate', () => {
+            if (!isNaN(audio.duration)) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = percent + '%';
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+                durationEl.textContent = formatTime(audio.duration);
+            }
+        });
+
+        // Load metadata để lấy duration đúng
+        audio.addEventListener('loadedmetadata', () => {
+            durationEl.textContent = formatTime(audio.duration);
+        });
+
+        // Click on progress bar to seek
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            if (!isNaN(audio.duration)) {
+                audio.currentTime = percent * audio.duration;
+            }
+        });
+
+        // Auto play next track
+        audio.addEventListener('ended', () => {
+            nextBtn.click();
+        });
+
+        // Format time
+        function formatTime(time) {
+            if (isNaN(time)) return '0:00';
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60);
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+
+        // Show container when clicking a nav link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                container.classList.add('show');
+
+                // Remove active class from all links
+                navLinks.forEach(l => l.classList.remove('active'));
+                // Add active class to clicked link
+                link.classList.add('active');
+
+                // Hide all sections
+                sections.forEach(section => section.classList.remove('active'));
+                // Show selected section
+                const sectionId = link.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
