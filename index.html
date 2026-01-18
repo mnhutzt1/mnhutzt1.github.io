@@ -2,66 +2,63 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- QUAN TRỌNG: viewport cho mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>mnhutzt</title>
     <style>
+        /* Reset and Base */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary-color: #1DB954;
+            --dark-bg: rgba(0, 0, 0, 0.85);
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --text-color: white;
+            --hover-color: rgba(255, 255, 255, 0.2);
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             min-height: 100vh;
-            width: 100vw;
+            width: 100%;
             overflow-x: hidden;
+            color: var(--text-color);
+            background: #000;
+            font-size: 16px; /* Base font size lớn hơn cho mobile */
         }
 
+        /* Background */
         .background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('./images/background.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             z-index: -2;
         }
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            z-index: -1;
-            display: none;
-        }
-
-        .overlay.show {
-            display: block;
-        }
-
-        /* Auto-play unlock overlay */
+        /* Overlay unlock */
         .autoplay-unlock {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: var(--dark-bg);
+            backdrop-filter: blur(10px);
             z-index: 9999;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            color: white;
-            text-align: center;
             padding: 20px;
+            text-align: center;
         }
 
         .autoplay-unlock.hidden {
@@ -70,34 +67,37 @@
 
         .autoplay-message {
             margin-bottom: 30px;
-            max-width: 600px;
+            max-width: 500px;
+            padding: 20px;
         }
 
         .autoplay-message h2 {
-            font-size: 32px;
-            margin-bottom: 15px;
-            color: #1DB954;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            font-size: clamp(1.5rem, 4vw, 2.5rem); /* Responsive font size */
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-weight: bold;
         }
 
         .autoplay-message p {
-            font-size: 18px;
+            font-size: clamp(1rem, 3vw, 1.2rem); /* Responsive font size */
             line-height: 1.6;
             color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 15px;
         }
 
         .autoplay-button {
-            background: linear-gradient(135deg, #1DB954, #191414);
+            background: linear-gradient(135deg, var(--primary-color), #191414);
             border: none;
             color: white;
-            padding: 20px 50px;
+            padding: clamp(15px, 4vw, 20px) clamp(30px, 6vw, 50px);
             border-radius: 50px;
-            font-size: 24px;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: bold;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
             box-shadow: 0 5px 15px rgba(29, 185, 84, 0.4);
+            min-height: 60px;
+            min-width: 200px;
         }
 
         .autoplay-button:hover {
@@ -111,9 +111,9 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
-            padding: 15px 30px;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -122,38 +122,50 @@
         }
 
         .title {
-            font-size: 28px;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
             font-weight: bold;
+            color: var(--text-color);
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
             color: white;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            letter-spacing: 2px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 101;
         }
 
         .nav-menu {
             display: flex;
-            gap: 30px;
+            gap: 20px;
             list-style: none;
+            transition: all 0.3s ease;
         }
 
         .nav-menu a {
-            color: white;
+            color: var(--text-color);
             text-decoration: none;
-            font-size: 16px;
+            font-size: clamp(0.9rem, 2vw, 1rem);
             padding: 8px 15px;
             border-radius: 5px;
             transition: all 0.3s ease;
             cursor: pointer;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            white-space: nowrap;
         }
 
         .nav-menu a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+            background: var(--hover-color);
         }
 
         .nav-menu a.active {
-            background: rgba(255, 255, 255, 0.3);
-            border-bottom: 2px solid white;
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--primary-color);
         }
 
         /* Content Container */
@@ -163,8 +175,8 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding-top: 80px;
-            padding-bottom: 40px;
+            padding: 80px 15px 100px; /* Thêm padding bottom cho music player */
+            width: 100%;
         }
 
         .container.show {
@@ -175,6 +187,7 @@
         .section {
             display: none;
             width: 100%;
+            max-width: 1200px;
             animation: fadeIn 0.5s ease-out;
         }
 
@@ -193,76 +206,86 @@
             }
         }
 
-        /* Cards */
+        /* Cards - Tối ưu cho mobile */
         .card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(5px);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 20px;
-            padding: 50px 60px;
+            padding: clamp(20px, 5vw, 40px);
             max-width: 600px;
-            width: 90%;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
-            text-align: center;
+            width: 100%;
             margin: 20px auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .card h2 {
-            font-size: 32px;
-            color: white;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            color: var(--text-color);
             margin-bottom: 20px;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            font-weight: bold;
         }
 
         .card p {
-            font-size: 16px;
+            font-size: clamp(1rem, 3vw, 1.1rem);
             color: rgba(255, 255, 255, 0.9);
             line-height: 1.6;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            text-align: center;
         }
 
         .card ul {
             list-style: none;
-            text-align: left;
-            margin-top: 15px;
+            margin-top: 20px;
+            padding: 0;
         }
 
         .card li {
-            font-size: 16px;
+            font-size: clamp(1rem, 3vw, 1.1rem);
             color: rgba(255, 255, 255, 0.9);
-            padding: 10px 0;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
         }
 
         .card li:before {
-            content: "✨ ";
-            margin-right: 10px;
+            content: "✨";
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .card li:last-child {
+            border-bottom: none;
         }
 
         /* Social Buttons */
         .social-buttons {
             display: flex;
+            flex-wrap: wrap;
             gap: 15px;
             justify-content: center;
-            margin-top: 20px;
-            flex-wrap: wrap;
+            margin-top: 30px;
         }
 
         .social-btn {
             background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-size: 16px;
+            padding: 15px 25px;
+            border-radius: 15px;
+            font-size: clamp(0.9rem, 3vw, 1rem);
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            font-weight: bold;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            justify-content: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 150px;
+            min-height: 60px;
         }
 
         .social-btn:hover {
@@ -298,89 +321,54 @@
             background: rgba(59, 89, 152, 0.5);
         }
 
-        @media (max-width: 768px) {
-            .title {
-                font-size: 20px;
-            }
-
-            .nav-menu {
-                gap: 15px;
-            }
-
-            .nav-menu a {
-                font-size: 14px;
-                padding: 6px 10px;
-            }
-
-            .card {
-                padding: 30px 40px;
-                max-width: 90%;
-            }
-
-            .card h2 {
-                font-size: 24px;
-            }
-
-            .card p, .card li {
-                font-size: 14px;
-            }
-
-            .autoplay-message h2 {
-                font-size: 24px;
-            }
-
-            .autoplay-message p {
-                font-size: 16px;
-            }
-
-            .autoplay-button {
-                padding: 15px 30px;
-                font-size: 20px;
-            }
-        }
-
-        /* Music Player */
+        /* Music Player - Responsive */
         .music-player {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.4);
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50px;
-            padding: 12px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px;
             z-index: 50;
-            min-width: 300px;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            display: none;
+        }
+
+        .music-player.show {
+            display: block;
         }
 
         .player-info {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
+            gap: 15px;
+            margin-bottom: 15px;
             color: white;
-            font-size: 12px;
         }
 
         .player-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #1DB954, #191414);
-            border-radius: 5px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), #191414);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.5rem;
             font-weight: bold;
+            flex-shrink: 0;
         }
 
         .player-text {
             flex: 1;
+            min-width: 0;
         }
 
         .player-text .track-name {
             color: white;
             font-weight: bold;
+            font-size: clamp(0.9rem, 3vw, 1rem);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -388,54 +376,25 @@
 
         .player-text .artist-name {
             color: rgba(255, 255, 255, 0.6);
-            font-size: 11px;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        .player-controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .player-btn {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 18px;
-            padding: 5px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .player-btn:hover {
-            color: #1DB954;
-            transform: scale(1.2);
-        }
-
-        .player-btn.play {
-            font-size: 24px;
-        }
-
         .progress-bar {
             width: 100%;
-            height: 3px;
+            height: 4px;
             background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            margin-bottom: 8px;
+            border-radius: 2px;
+            margin: 10px 0;
             cursor: pointer;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: #1DB954;
+            background: var(--primary-color);
             width: 0%;
             transition: width 0.1s linear;
         }
@@ -444,97 +403,304 @@
             display: flex;
             justify-content: space-between;
             color: rgba(255, 255, 255, 0.6);
-            font-size: 10px;
-            margin-bottom: 8px;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            margin-bottom: 15px;
+        }
+
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            gap: clamp(15px, 5vw, 30px);
+            align-items: center;
+        }
+
+        .player-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            padding: 10px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px; /* Đảm bảo dễ tap trên mobile */
+            min-height: 44px;
+        }
+
+        .player-btn:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .player-btn.play {
+            font-size: clamp(1.5rem, 5vw, 2rem);
         }
 
         .volume-control {
+            position: relative;
+        }
+
+        .volume-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            cursor: pointer;
+            padding: 10px;
+            min-width: 44px;
+            min-height: 44px;
+        }
+
+        .volume-slider-container {
             display: none;
             position: absolute;
-            bottom: 50px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.6);
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 10px;
-            padding: 15px 10px;
-            width: 40px;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
         }
 
-        .volume-control.show {
-            display: flex;
+        .volume-slider-container.show {
+            display: block;
         }
 
         .volume-slider {
-            width: 30px;
-            height: 100px;
-            background: linear-gradient(to top, #1DB954, rgba(29, 185, 84, 0.3));
+            width: 100px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
             outline: none;
             cursor: pointer;
-            writing-mode: vertical-lr;
-            direction: rtl;
         }
 
         .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: slider-thumb;
-            appearance: slider-thumb;
-            width: 15px;
-            height: 15px;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
             background: white;
             border-radius: 50%;
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
-        .volume-slider::-moz-range-thumb {
-            width: 15px;
-            height: 15px;
-            background: white;
-            border-radius: 50%;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        @media (max-width: 768px) {
-            .music-player {
-                min-width: 250px;
-                bottom: 10px;
-                right: 10px;
+        /* RESPONSIVE BREAKPOINTS */
+        /* Mobile - Portrait */
+        @media (max-width: 480px) {
+            .navbar {
                 padding: 10px 15px;
             }
 
-            .player-info {
-                margin-bottom: 8px;
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 80px 30px 30px;
+                transition: right 0.3s ease;
+                z-index: 99;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu a {
+                font-size: 1.1rem;
+                padding: 15px;
+                text-align: center;
+                border-radius: 10px;
+                margin-bottom: 10px;
+            }
+
+            .card {
+                border-radius: 15px;
+                padding: 25px;
+            }
+
+            .social-btn {
+                min-width: 100%;
+                font-size: 1rem;
+                padding: 18px 25px;
+            }
+
+            .music-player {
+                padding: 12px;
             }
 
             .player-controls {
+                gap: 20px;
+            }
+        }
+
+        /* Mobile - Landscape */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .autoplay-message h2 {
+                font-size: 1.8rem;
+            }
+
+            .autoplay-message p {
+                font-size: 1rem;
+            }
+
+            .navbar {
+                padding: 10px 15px;
+            }
+
+            .nav-menu {
                 gap: 10px;
             }
 
-            .player-btn {
-                font-size: 16px;
+            .nav-menu a {
+                font-size: 0.9rem;
+                padding: 6px 10px;
             }
 
-            .player-btn.play {
-                font-size: 20px;
+            .card {
+                padding: 25px;
+                margin: 10px auto;
             }
+
+            .container {
+                padding: 70px 10px 90px;
+            }
+        }
+
+        /* Tablet */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .nav-menu {
+                gap: 15px;
+            }
+
+            .nav-menu a {
+                font-size: 1rem;
+                padding: 10px 15px;
+            }
+
+            .card {
+                padding: 30px;
+            }
+
+            .social-btn {
+                min-width: 180px;
+            }
+        }
+
+        /* PC/Laptop */
+        @media (min-width: 769px) {
+            .navbar {
+                padding: 20px 40px;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .nav-menu {
+                gap: 30px;
+            }
+
+            .nav-menu a {
+                font-size: 1.1rem;
+                padding: 10px 20px;
+            }
+
+            .card {
+                padding: 40px 50px;
+                margin: 30px auto;
+            }
+
+            .container {
+                padding: 100px 40px 120px;
+            }
+
+            .music-player {
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                max-width: 600px;
+                border-radius: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-top: none;
+            }
+        }
+
+        /* Large Screens */
+        @media (min-width: 1200px) {
+            .card {
+                max-width: 700px;
+            }
+
+            .music-player {
+                max-width: 700px;
+            }
+        }
+
+        /* Fix cho màn hình rất nhỏ */
+        @media (max-width: 320px) {
+            .title {
+                font-size: 1rem;
+            }
+
+            .autoplay-button {
+                min-width: 180px;
+                min-height: 50px;
+                font-size: 1rem;
+            }
+
+            .social-btn {
+                min-height: 50px;
+                font-size: 0.9rem;
+            }
+
+            .card h2 {
+                font-size: 1.3rem;
+            }
+
+            .card p, .card li {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+
+        .show {
+            display: block !important;
+        }
+
+        .flex {
+            display: flex !important;
         }
     </style>
 </head>
 <body>
+    <!-- Background -->
     <div class="background"></div>
-    <div class="overlay" id="overlay"></div>
 
     <!-- Auto-play Unlock Overlay -->
     <div class="autoplay-unlock" id="autoplayUnlock">
         <div class="autoplay-message">
             <h2>🎵 Chào mừng đến với mnhutzt!</h2>
-            <p>Trang web có nhạc nền để bạn thưởng thức. Vui lòng nhấn nút bên dưới để mở khóa tính năng phát nhạc.</p>
-            <p><em>Lưu ý: Trình duyệt yêu cầu tương tác của người dùng trước khi phát nhạc tự động.</em></p>
+            <p>Trang web có nhạc nền để bạn thưởng thức. Nhấn nút bên dưới để bắt đầu!</p>
+            <p><small><em>Trình duyệt yêu cầu tương tác của bạn trước khi phát nhạc</em></small></p>
         </div>
         <button class="autoplay-button" id="unlockMusicBtn">
             🔓 Mở Khóa Nhạc
@@ -544,22 +710,24 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="title">mnhutzt</div>
-        <ul class="nav-menu">
-            <li><a class="nav-link active" data-section="home">Home</a></li>
-            <li><a class="nav-link" data-section="about">About</a></li>
-            <li><a class="nav-link" data-section="skills">Skills</a></li>
-            <li><a class="nav-link" data-section="projects">Projects</a></li>
-            <li><a class="nav-link" data-section="contact">Contact</a></li>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a class="nav-link active" data-section="home">🏠 Home</a></li>
+            <li><a class="nav-link" data-section="about">👤 About</a></li>
+            <li><a class="nav-link" data-section="skills">💡 Skills</a></li>
+            <li><a class="nav-link" data-section="projects">🚀 Projects</a></li>
+            <li><a class="nav-link" data-section="contact">📞 Contact</a></li>
         </ul>
     </nav>
 
-    <!-- Sections -->
+    <!-- Main Content -->
     <div class="container" id="mainContainer">
         <!-- Home -->
         <div id="home" class="section active">
             <div class="card">
                 <h2>Welcome to mnhutzt</h2>
-                <p>Chào mừng bạn đến với trang web của tui. Tui là một người yêu thích sáng tạo và công nghệ!.</p>
+                <p>Chào mừng bạn đến với trang web của tui. Tui là một người yêu thích sáng tạo và công nghệ!</p>
+                <p>Tận hưởng trải nghiệm với nhạc nền và khám phá những gì tui đang làm nhé!</p>
             </div>
         </div>
 
@@ -567,10 +735,12 @@
         <div id="about" class="section">
             <div class="card">
                 <h2>About Me</h2>
-                <p>Tui là một người đam mê công nghệ.</p>
+                <p>Tui là một người đam mê công nghệ và sáng tạo.</p>
                 <ul>
                     <li>Phát triển ứng dụng</li>
                     <li>Tối ưu hóa hiệu suất</li>
+                    <li>Học hỏi công nghệ mới</li>
+                    <li>Chia sẻ kiến thức</li>
                 </ul>
             </div>
         </div>
@@ -580,8 +750,11 @@
             <div class="card">
                 <h2>My Skills</h2>
                 <ul>
-                    <li>PYTHON 10%</li>
-                    <li>Web Design & UX/UI 10%</li>
+                    <li>PYTHON - 10%</li>
+                    <li>Web Design & UX/UI - 10%</li>
+                    <li>HTML/CSS - 15%</li>
+                    <li>JavaScript - 5%</li>
+                    <li>Problem Solving - 20%</li>
                 </ul>
             </div>
         </div>
@@ -592,7 +765,9 @@
                 <h2>My Projects</h2>
                 <p>Những dự án mà tôi tự hào:</p>
                 <ul>
-                    <li>Không có cái nào để tự hào</li>
+                    <li>Trang web cá nhân này</li>
+                    <li>Learning new technologies</li>
+                    <li>Building small tools</li>
                 </ul>
             </div>
         </div>
@@ -619,86 +794,120 @@
 
     <!-- Music Player -->
     <div class="music-player" id="musicPlayer">
-        <div class="progress-bar">
+        <div class="player-info">
+            <div class="player-icon">♪</div>
+            <div class="player-text">
+                <div class="track-name" id="trackName">Đang tải...</div>
+                <div class="artist-name" id="artistName">mnhutzt</div>
+            </div>
+        </div>
+        
+        <div class="progress-bar" id="progressBar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
+        
         <div class="time-display">
             <span id="currentTime">0:00</span>
             <span id="duration">0:00</span>
         </div>
+        
         <div class="player-controls">
             <button class="player-btn" id="prevBtn">⏮</button>
             <button class="player-btn play" id="playBtn">▶</button>
             <button class="player-btn" id="nextBtn">⏭</button>
-            <div style="position: relative;">
-                <button class="player-btn" id="volumeBtn">🔊</button>
-                <div class="volume-control" id="volumeControl">
+            
+            <div class="volume-control">
+                <button class="volume-btn" id="volumeBtn">🔊</button>
+                <div class="volume-slider-container" id="volumeSliderContainer">
                     <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="70">
                 </div>
             </div>
         </div>
-        <audio id="audioPlayer"></audio>
+        
+        <audio id="audioPlayer" preload="metadata"></audio>
     </div>
 
     <script>
-        // Danh sách nhạc (thêm file nhạc vào folder music/)
+        // Danh sách nhạc
         const playlist = [
-            { name: 'Song 1', artist: 'Artist 1', file: './music/song1.mp3' },
+            { 
+                name: 'Song 1', 
+                artist: 'Artist 1', 
+                file: './music/song1.mp3' 
+            },
+            // Thêm các bài hát khác ở đây
+            // { name: 'Song 2', artist: 'Artist 2', file: './music/song2.mp3' },
         ];
 
         let currentTrackIndex = 0;
         let isPlaying = false;
         let isMusicUnlocked = false;
 
+        // DOM Elements
         const audio = document.getElementById('audioPlayer');
         const playBtn = document.getElementById('playBtn');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
+        const trackName = document.getElementById('trackName');
+        const artistName = document.getElementById('artistName');
         const progressFill = document.getElementById('progressFill');
         const currentTimeEl = document.getElementById('currentTime');
         const durationEl = document.getElementById('duration');
-        const progressBar = document.querySelector('.progress-bar');
+        const progressBar = document.getElementById('progressBar');
         const autoplayUnlock = document.getElementById('autoplayUnlock');
         const unlockMusicBtn = document.getElementById('unlockMusicBtn');
         const mainContainer = document.getElementById('mainContainer');
         const musicPlayer = document.getElementById('musicPlayer');
-
-        // Volume control
         const volumeBtn = document.getElementById('volumeBtn');
-        const volumeControl = document.getElementById('volumeControl');
         const volumeSlider = document.getElementById('volumeSlider');
+        const volumeSliderContainer = document.getElementById('volumeSliderContainer');
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.section');
 
-        // Ẩn music player ban đầu
-        musicPlayer.style.display = 'none';
-
-        // Check nếu user đã unlock music trước đó
-        if (localStorage.getItem('musicUnlocked') === 'true') {
-            unlockMusic();
+        // Khởi tạo
+        function init() {
+            // Kiểm tra nếu đã unlock trước đó
+            if (localStorage.getItem('musicUnlocked') === 'true') {
+                unlockMusic();
+            }
+            
+            // Load track đầu tiên
+            loadTrack(0);
+            
+            // Set volume
+            audio.volume = volumeSlider.value / 100;
+            
+            // Update UI cho mobile
+            updateForMobile();
         }
 
-        // Mở khóa nhạc
+        // Unlock music
         unlockMusicBtn.addEventListener('click', unlockMusic);
-
+        
         function unlockMusic() {
             isMusicUnlocked = true;
             localStorage.setItem('musicUnlocked', 'true');
             
-            // Ẩn overlay unlock
+            // Ẩn overlay
             autoplayUnlock.classList.add('hidden');
             
-            // Hiển thị main content và music player
+            // Hiển thị main content
             mainContainer.classList.add('show');
-            musicPlayer.style.display = 'block';
+            musicPlayer.classList.add('show');
             
-            // Load và play nhạc
-            loadTrack(0);
-            audio.volume = volumeSlider.value / 100;
+            // Update track info
+            updateTrackInfo();
             
             // Thử phát nhạc
             playMusic();
         }
 
+        // Play music
         function playMusic() {
+            if (!isMusicUnlocked) return;
+            
             audio.play().then(() => {
                 playBtn.textContent = '⏸';
                 isPlaying = true;
@@ -710,44 +919,20 @@
             });
         }
 
-        // Set initial volume
-        audio.volume = volumeSlider.value / 100;
-
-        // Toggle volume control
-        volumeBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            volumeControl.classList.toggle('show');
-        });
-
-        // Hide volume control when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('#volumeBtn') && !e.target.closest('.volume-control')) {
-                volumeControl.classList.remove('show');
-            }
-        });
-
-        // Adjust volume
-        volumeSlider.addEventListener('input', (e) => {
-            audio.volume = e.target.value / 100;
-            // Change icon based on volume
-            if (e.target.value == 0) {
-                volumeBtn.textContent = '🔇';
-            } else if (e.target.value < 50) {
-                volumeBtn.textContent = '🔉';
-            } else {
-                volumeBtn.textContent = '🔊';
-            }
-        });
-
-        const navLinks = document.querySelectorAll('.nav-link');
-        const sections = document.querySelectorAll('.section');
-
         // Load track
         function loadTrack(index) {
             if (playlist[index]) {
                 audio.src = playlist[index].file;
                 currentTrackIndex = index;
-                console.log('Đã load track:', playlist[index].name);
+                updateTrackInfo();
+            }
+        }
+
+        // Update track info
+        function updateTrackInfo() {
+            if (playlist[currentTrackIndex]) {
+                trackName.textContent = playlist[currentTrackIndex].name;
+                artistName.textContent = playlist[currentTrackIndex].artist;
             }
         }
 
@@ -763,44 +948,33 @@
                 playBtn.textContent = '▶';
                 isPlaying = false;
             } else {
-                if (!audio.src) loadTrack(0);
-                audio.play().then(() => {
-                    playBtn.textContent = '⏸';
-                    isPlaying = true;
-                }).catch(err => {
-                    console.log('Lỗi khi phát:', err);
-                    alert('Không thể phát nhạc. Vui lòng kiểm tra file nhạc!');
-                });
+                playMusic();
             }
         });
 
-        // Next Track
+        // Next track
         nextBtn.addEventListener('click', () => {
             if (!isMusicUnlocked) return;
             
             currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
             loadTrack(currentTrackIndex);
             if (isPlaying) {
-                audio.play().catch(err => {
-                    console.log('Lỗi khi chuyển bài:', err);
-                });
+                playMusic();
             }
         });
 
-        // Previous Track
+        // Previous track
         prevBtn.addEventListener('click', () => {
             if (!isMusicUnlocked) return;
             
             currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
             loadTrack(currentTrackIndex);
             if (isPlaying) {
-                audio.play().catch(err => {
-                    console.log('Lỗi khi chuyển bài:', err);
-                });
+                playMusic();
             }
         });
 
-        // Update progress bar và duration
+        // Progress bar update
         audio.addEventListener('timeupdate', () => {
             if (!isNaN(audio.duration)) {
                 const percent = (audio.currentTime / audio.duration) * 100;
@@ -810,14 +984,14 @@
             }
         });
 
-        // Load metadata để lấy duration đúng
+        // Load metadata
         audio.addEventListener('loadedmetadata', () => {
             if (!isNaN(audio.duration)) {
                 durationEl.textContent = formatTime(audio.duration);
             }
         });
 
-        // Click on progress bar to seek
+        // Seek on progress bar click
         progressBar.addEventListener('click', (e) => {
             if (!isMusicUnlocked) return;
             
@@ -828,15 +1002,78 @@
             }
         });
 
-        // Auto play next track
+        // Auto next track
         audio.addEventListener('ended', () => {
             nextBtn.click();
         });
 
-        // Handle audio errors
-        audio.addEventListener('error', (e) => {
-            console.error('Lỗi audio:', e);
-            alert('Không thể load file nhạc. Vui lòng kiểm tra file nhạc trong thư mục music/');
+        // Volume control
+        volumeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            volumeSliderContainer.classList.toggle('show');
+        });
+
+        // Hide volume slider when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#volumeBtn') && !e.target.closest('.volume-slider-container')) {
+                volumeSliderContainer.classList.remove('show');
+            }
+        });
+
+        // Adjust volume
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value / 100;
+            // Update volume icon
+            if (e.target.value == 0) {
+                volumeBtn.textContent = '🔇';
+            } else if (e.target.value < 50) {
+                volumeBtn.textContent = '🔉';
+            } else {
+                volumeBtn.textContent = '🔊';
+            }
+        });
+
+        // Mobile menu toggle
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Close menu when clicking a link (mobile)
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 480) {
+                    navMenu.classList.remove('active');
+                    menuToggle.textContent = '☰';
+                }
+                
+                // Navigate to section
+                const sectionId = link.getAttribute('data-section');
+                
+                // Update active nav link
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                
+                // Show selected section
+                sections.forEach(section => section.classList.remove('active'));
+                document.getElementById(sectionId).classList.add('active');
+                
+                // Scroll to top on mobile
+                if (window.innerWidth <= 768) {
+                    window.scrollTo(0, 0);
+                }
+            });
+        });
+
+        // Close menu when clicking outside (mobile)
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 480 && 
+                !e.target.closest('#navMenu') && 
+                !e.target.closest('#menuToggle') &&
+                navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                menuToggle.textContent = '☰';
+            }
         });
 
         // Format time
@@ -847,35 +1084,36 @@
             return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
         }
 
-        // Show container when clicking a nav link
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (!isMusicUnlocked) {
-                    autoplayUnlock.classList.remove('hidden');
-                    return;
-                }
-                
-                mainContainer.classList.add('show');
+        // Update UI for mobile
+        function updateForMobile() {
+            // Adjust font sizes for very small screens
+            if (window.innerWidth <= 320) {
+                document.body.style.fontSize = '14px';
+            } else if (window.innerWidth <= 480) {
+                document.body.style.fontSize = '16px';
+            } else {
+                document.body.style.fontSize = '16px';
+            }
+        }
 
-                // Remove active class from all links
-                navLinks.forEach(l => l.classList.remove('active'));
-                // Add active class to clicked link
-                link.classList.add('active');
+        // Handle window resize
+        window.addEventListener('resize', updateForMobile);
 
-                // Hide all sections
-                sections.forEach(section => section.classList.remove('active'));
-                // Show selected section
-                const sectionId = link.getAttribute('data-section');
-                document.getElementById(sectionId).classList.add('active');
-            });
+        // Initialize
+        window.addEventListener('DOMContentLoaded', init);
+
+        // Handle orientation change
+        window.addEventListener('orientationchange', () => {
+            // Update after orientation change
+            setTimeout(updateForMobile, 100);
         });
 
-        // Auto hide unlock overlay after 10 seconds if user doesn't interact
+        // Auto-hide unlock overlay after 15 seconds
         setTimeout(() => {
             if (!isMusicUnlocked) {
-                unlockMusicBtn.style.animation = 'pulse 1s infinite';
+                unlockMusicBtn.style.animation = 'pulse 2s infinite';
             }
-        }, 10000);
+        }, 15000);
     </script>
 </body>
 </html>
