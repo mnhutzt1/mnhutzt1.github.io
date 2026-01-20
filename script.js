@@ -1,12 +1,14 @@
 // Danh sách nhạc (thêm file nhạc vào folder music/)
 const playlist = [
     { name: 'Song 1', artist: 'Artist 1', file: './music/song1.mp3' },
+    { name: 'Song 2', artist: 'Artist 2', file: './music/song2.mp3' }
 ];
 
 let currentTrackIndex = 0;
 let isPlaying = false;
 let isMusicUnlocked = false;
 
+// DOM Elements
 const audio = document.getElementById('audioPlayer');
 const playBtn = document.getElementById('playBtn');
 const prevBtn = document.getElementById('prevBtn');
@@ -19,14 +21,32 @@ const autoplayUnlock = document.getElementById('autoplayUnlock');
 const unlockMusicBtn = document.getElementById('unlockMusicBtn');
 const mainContainer = document.getElementById('mainContainer');
 const musicPlayer = document.getElementById('musicPlayer');
-
-// Volume control
 const volumeBtn = document.getElementById('volumeBtn');
 const volumeControl = document.getElementById('volumeControl');
 const volumeSlider = document.getElementById('volumeSlider');
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.section');
+
+// Theme Switcher Elements
+const themeToggle = document.getElementById('themeToggle');
+const themePanel = document.getElementById('themePanel');
+const colorOptions = document.querySelectorAll('.color-option');
+const modeButtons = document.querySelectorAll('.mode-btn');
 
 // Ẩn music player ban đầu
 musicPlayer.style.display = 'none';
+
+// Load saved theme from localStorage
+function loadSavedTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'green';
+    const savedMode = localStorage.getItem('mode') || 'dark';
+    
+    // Apply saved theme
+    document.body.classList.add(`theme-${savedTheme}`, `${savedMode}-mode`);
+    setActiveColor(savedTheme);
+    setActiveMode(savedMode);
+    updateThemeToggleIcon();
+}
 
 // Check nếu user đã unlock music trước đó
 if (localStorage.getItem('musicUnlocked') === 'true') {
@@ -99,9 +119,6 @@ volumeSlider.addEventListener('input', (e) => {
     }
 });
 
-const navLinks = document.querySelectorAll('.nav-link');
-const sections = document.querySelectorAll('.section');
-
 // Load track
 function loadTrack(index) {
     if (playlist[index]) {
@@ -128,7 +145,6 @@ playBtn.addEventListener('click', () => {
             isPlaying = true;
         }).catch(err => {
             console.log('Lỗi khi phát:', err);
-            alert('Không thể phát nhạc. Vui lòng kiểm tra file nhạc!');
         });
     }
 });
@@ -192,12 +208,6 @@ audio.addEventListener('ended', () => {
     nextBtn.click();
 });
 
-// Handle audio errors
-audio.addEventListener('error', (e) => {
-    console.error('Lỗi audio:', e);
-    alert('Không thể load file nhạc. Vui lòng kiểm tra file nhạc trong thư mục music/');
-});
-
 // Format time
 function formatTime(time) {
     if (isNaN(time) || !isFinite(time)) return '0:00';
@@ -206,7 +216,7 @@ function formatTime(time) {
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
-// Show container when clicking a nav link
+// Navigation
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
         if (!isMusicUnlocked) {
@@ -229,13 +239,6 @@ navLinks.forEach(link => {
     });
 });
 
-// Auto hide unlock overlay after 10 seconds if user doesn't interact
-setTimeout(() => {
-    if (!isMusicUnlocked) {
-        unlockMusicBtn.style.animation = 'pulse 1s infinite';
-    }
-}, 10000);
-
 // Hiệu ứng hover cho progress bar
 progressBar.addEventListener('mouseenter', () => {
     progressFill.style.height = '6px';
@@ -244,3 +247,91 @@ progressBar.addEventListener('mouseenter', () => {
 progressBar.addEventListener('mouseleave', () => {
     progressFill.style.height = '3px';
 });
+
+// Theme Switcher Functions
+loadSavedTheme();
+
+// Toggle theme panel
+themeToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    themePanel.classList.toggle('show');
+});
+
+// Hide theme panel when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.theme-switcher')) {
+        themePanel.classList.remove('show');
+    }
+});
+
+// Color theme selection
+colorOptions.forEach(option => {
+    option.addEventListener('click', () => {
+        const theme = option.dataset.theme;
+        
+        // Remove all theme classes
+        document.body.classList.remove('theme-green', 'theme-blue', 'theme-purple', 'theme-red', 'theme-orange', 'theme-pink');
+        
+        // Add selected theme
+        document.body.classList.add(`theme-${theme}`);
+        
+        // Update active state
+        setActiveColor(theme);
+        
+        // Save to localStorage
+        localStorage.setItem('theme', theme);
+    });
+});
+
+// Dark/Light mode selection
+modeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const mode = button.dataset.mode;
+        
+        // Remove both modes
+        document.body.classList.remove('dark-mode', 'light-mode');
+        
+        // Add selected mode
+        document.body.classList.add(`${mode}-mode`);
+        
+        // Update active state
+        setActiveMode(mode);
+        
+        // Save to localStorage
+        localStorage.setItem('mode', mode);
+        
+        // Update icon
+        updateThemeToggleIcon();
+    });
+});
+
+// Helper functions
+function setActiveColor(theme) {
+    colorOptions.forEach(option => {
+        option.classList.remove('active');
+        if (option.dataset.theme === theme) {
+            option.classList.add('active');
+        }
+    });
+}
+
+function setActiveMode(mode) {
+    modeButtons.forEach(button => {
+        button.classList.remove('active');
+        if (button.dataset.mode === mode) {
+            button.classList.add('active');
+        }
+    });
+}
+
+function updateThemeToggleIcon() {
+    const isLightMode = document.body.classList.contains('light-mode');
+    themeToggle.textContent = isLightMode ? '☀️' : '🎨';
+}
+
+// Auto hide unlock overlay after 10 seconds if user doesn't interact
+setTimeout(() => {
+    if (!isMusicUnlocked) {
+        unlockMusicBtn.style.animation = 'pulse 1s infinite';
+    }
+}, 10000);
