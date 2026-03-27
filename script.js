@@ -1,4 +1,4 @@
-// Danh sách nhạc (thêm file nhạc vào folder music/)
+// Danh sách nhạc
 const playlist = [
     { name: 'Song 1', artist: 'Artist 1', file: './music/song1.mp3' },
     { name: 'Song 2', artist: 'Artist 2', file: './music/song2.mp3' }
@@ -335,3 +335,75 @@ setTimeout(() => {
         unlockMusicBtn.style.animation = 'pulse 1s infinite';
     }
 }, 10000);
+
+// Discord status
+const discordId = '1066597531951300658';
+const discordAvatar = document.getElementById('discordAvatar');
+const discordUsername = document.getElementById('discordUsername');
+const statusDot = document.getElementById('statusDot');
+const statusText = document.getElementById('statusText');
+
+// Set initial status
+statusDot.className = 'status-dot offline';
+statusText.textContent = 'Đang tải...';
+
+async function updateDiscordStatus() {
+    try {
+        const response = await fetch(`https://api.lanyard.rest/v1/users/${discordId}`);
+        const body = await response.json();
+
+        if (!response.ok || !body.success || !body.data || !body.data.discord_user) {
+            throw new Error('Không có data Discord');
+        }
+
+        const user = body.data.discord_user;
+        const presence = body.data.discord_status;
+
+        discordUsername.textContent = user.username || 'Người Tình Mùa Đông';
+        discordAvatar.src = user.avatar ? `https://cdn.discordapp.com/avatars/${discordId}/${user.avatar}.png` : './images/discord-avatar.png';
+
+        let statusClass = 'offline';
+        let statusName = 'Offline';
+
+        if (presence === 'online') {
+            statusClass = 'online';
+            statusName = 'Online';
+        } else if (presence === 'idle') {
+            statusClass = 'idle';
+            statusName = 'Idle';
+        } else if (presence === 'dnd') {
+            statusClass = 'dnd';
+            statusName = 'Do Not Disturb';
+        }
+
+        statusDot.className = `status-dot ${statusClass}`;
+
+        //  tên game/activity 
+        let activityName = '';
+        if (body.data.activities && body.data.activities.length > 0) {
+            const spotify = body.data.activities.find(a => a.name === 'Spotify');
+            if (spotify) {
+                const artist = spotify.state || '';
+                const song = spotify.details || '';
+                activityName = ` • Spotify: ${song}${artist ? ` - ${artist}` : ''}`;
+            } else {
+                const activity = body.data.activities.find(a => a.type === 0 || a.type === 1 || a.type === 3);
+                if (activity && activity.name) {
+                    activityName = ` • ${activity.name}`;
+                    if (activity.details) {
+                        activityName += ` (${activity.details})`;
+                    }
+                }
+            }
+        }
+
+        statusText.textContent = `Status: ${statusName}${activityName}`;
+    } catch (err) {
+        statusDot.className = 'status-dot offline';
+        statusText.textContent = 'Status: Không lấy được status';
+        console.error('Discord status fetch failed:', err);
+    }
+}
+
+updateDiscordStatus();
+setInterval(updateDiscordStatus, 60000);
