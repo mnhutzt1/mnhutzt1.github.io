@@ -66,7 +66,7 @@ function unlockMusic() {
     setTimeout(() => {
         autoplayUnlock.style.display = 'none';
         
-        // Hiển thị main content và music player
+        // main content và music player
         mainContainer.classList.add('show');
         musicPlayer.style.display = 'block';
         
@@ -185,7 +185,7 @@ audio.addEventListener('timeupdate', () => {
     }
 });
 
-// Load metadata để lấy duration đúng
+// Load metadata 
 audio.addEventListener('loadedmetadata', () => {
     if (!isNaN(audio.duration)) {
         durationEl.textContent = formatTime(audio.duration);
@@ -224,7 +224,7 @@ navLinks.forEach(link => {
             return;
         }
         
-        // Ẩn các section hiện tại
+        // Ẩn section hiện tại
         document.querySelector('.section.active')?.classList.remove('active');
         
         // Remove active class from all links
