@@ -6,7 +6,7 @@
     <title>mnhutzt Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Video Background CSS bổ sung để tràn màn hình */
+        /* Video Background */
         .background video {
             position: absolute;
             top: 50%;
@@ -33,6 +33,12 @@
             line-height: 1.2;
         }
 
+        .status-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         .discord-username-small {
             font-size: 12px;
             font-weight: 600;
@@ -57,10 +63,10 @@
             padding: 16px 20px;
             min-width: 260px;
             min-height: 70px;
-            background: rgba(0, 0, 0, 0.45);
-            border: 1px solid rgba(255, 255, 255, 0.32);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             border-radius: 18px;
-            backdrop-filter: blur(18px);
+            backdrop-filter: blur(5px);
             color: #fff;
             box-shadow: 0 14px 36px rgba(0, 0, 0, 0.38);
         }
@@ -72,7 +78,38 @@
         }
 
         .status-dot {
-            display: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 0 10px rgba(67, 181, 129, 0.8), inset 0 0 5px rgba(255, 255, 255, 0.4);
+            animation: statusPulse 2s infinite;
+        }
+
+        .status-dot.online {
+            background: #43B581;
+            box-shadow: 0 0 10px rgba(67, 181, 129, 0.8), inset 0 0 5px rgba(255, 255, 255, 0.4);
+        }
+
+        .status-dot.idle {
+            background: #FAA61A;
+            box-shadow: 0 0 10px rgba(250, 166, 26, 0.8), inset 0 0 5px rgba(255, 255, 255, 0.4);
+        }
+
+        .status-dot.dnd {
+            background: #F04747;
+            box-shadow: 0 0 10px rgba(240, 71, 71, 0.8), inset 0 0 5px rgba(255, 255, 255, 0.4);
+        }
+
+        .status-dot.offline {
+            background: #747F8D;
+            box-shadow: 0 0 10px rgba(116, 127, 141, 0.8), inset 0 0 5px rgba(255, 255, 255, 0.4);
+            animation: none;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { box-shadow: 0 0 10px var(--status-color, rgba(67, 181, 129, 0.8)), inset 0 0 5px rgba(255, 255, 255, 0.4); }
+            50% { box-shadow: 0 0 20px var(--status-color, rgba(67, 181, 129, 1)), inset 0 0 5px rgba(255, 255, 255, 0.6); }
         }
 
         .status-text {
