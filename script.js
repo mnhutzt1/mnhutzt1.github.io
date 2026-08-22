@@ -1,4 +1,3 @@
-// Danh sách nhạc
 const playlist = [
     { name: 'Song 1', artist: 'Artist 1', file: './music/song1.mp3' },
     { name: 'Song 2', artist: 'Artist 2', file: './music/song2.mp3' }
@@ -33,48 +32,42 @@ const themePanel = document.getElementById('themePanel');
 const colorOptions = document.querySelectorAll('.color-option');
 const modeButtons = document.querySelectorAll('.mode-btn');
 
-// Ẩn music player ban đầu
 musicPlayer.style.display = 'none';
 
 // Load saved theme from localStorage
 function loadSavedTheme() {
     const savedTheme = localStorage.getItem('theme') || 'green';
     const savedMode = localStorage.getItem('mode') || 'dark';
-    
-    // Apply saved theme
+    const savedWeather = localStorage.getItem('weather') || 'rain';
+
     document.body.classList.add(`theme-${savedTheme}`, `${savedMode}-mode`);
     setActiveColor(savedTheme);
     setActiveMode(savedMode);
+    setActiveWeatherBtn(savedWeather);
     updateThemeToggleIcon();
+
+    createWeatherEffect(savedWeather);
 }
 
-// Check nếu user đã unlock music trước đó
 if (localStorage.getItem('musicUnlocked') === 'true') {
     unlockMusic();
 }
 
-// Mở khóa nhạc
 unlockMusicBtn.addEventListener('click', unlockMusic);
 
 function unlockMusic() {
     isMusicUnlocked = true;
     localStorage.setItem('musicUnlocked', 'true');
-    
-    // Ẩn overlay unlock
+
     autoplayUnlock.classList.add('hidden');
-    
+
     setTimeout(() => {
         autoplayUnlock.style.display = 'none';
-        
-        // main content và music player
         mainContainer.classList.add('show');
         musicPlayer.style.display = 'block';
-        
-        // Load và play nhạc
+
         loadTrack(0);
         audio.volume = volumeSlider.value / 100;
-        
-        // Thử phát nhạc
         playMusic();
     }, 300);
 }
@@ -99,7 +92,6 @@ volumeBtn.addEventListener('click', (e) => {
     volumeControl.classList.toggle('show');
 });
 
-// Hide volume control when clicking outside
 document.addEventListener('click', (e) => {
     if (!e.target.closest('#volumeBtn') && !e.target.closest('.volume-control')) {
         volumeControl.classList.remove('show');
@@ -109,7 +101,6 @@ document.addEventListener('click', (e) => {
 // Adjust volume
 volumeSlider.addEventListener('input', (e) => {
     audio.volume = e.target.value / 100;
-    // Change icon based on volume
     if (e.target.value == 0) {
         volumeBtn.textContent = '🔇';
     } else if (e.target.value < 50) {
@@ -133,7 +124,7 @@ playBtn.addEventListener('click', () => {
         alert('Vui lòng mở khóa nhạc trước!');
         return;
     }
-    
+
     if (isPlaying) {
         audio.pause();
         playBtn.textContent = '▶';
@@ -152,7 +143,7 @@ playBtn.addEventListener('click', () => {
 // Next Track
 nextBtn.addEventListener('click', () => {
     if (!isMusicUnlocked) return;
-    
+
     currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
     loadTrack(currentTrackIndex);
     if (isPlaying) {
@@ -165,7 +156,7 @@ nextBtn.addEventListener('click', () => {
 // Previous Track
 prevBtn.addEventListener('click', () => {
     if (!isMusicUnlocked) return;
-    
+
     currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
     loadTrack(currentTrackIndex);
     if (isPlaying) {
@@ -195,7 +186,7 @@ audio.addEventListener('loadedmetadata', () => {
 // Click on progress bar to seek
 progressBar.addEventListener('click', (e) => {
     if (!isMusicUnlocked) return;
-    
+
     const rect = progressBar.getBoundingClientRect();
     const percent = (e.clientX - rect.left) / rect.width;
     if (!isNaN(audio.duration)) {
@@ -203,7 +194,6 @@ progressBar.addEventListener('click', (e) => {
     }
 });
 
-// Auto play next track
 audio.addEventListener('ended', () => {
     nextBtn.click();
 });
@@ -223,23 +213,17 @@ navLinks.forEach(link => {
             autoplayUnlock.classList.remove('hidden');
             return;
         }
-        
-        // Ẩn section hiện tại
+
         document.querySelector('.section.active')?.classList.remove('active');
-        
-        // Remove active class from all links
         navLinks.forEach(l => l.classList.remove('active'));
-        // Add active class to clicked link
         link.classList.add('active');
 
-        // Hiển thị section mới
         const sectionId = link.getAttribute('data-section');
         const newSection = document.getElementById(sectionId);
-        newSection.classList.add('active');
+        if (newSection) newSection.classList.add('active');
     });
 });
 
-// Hiệu ứng hover cho progress bar
 progressBar.addEventListener('mouseenter', () => {
     progressFill.style.height = '6px';
 });
@@ -249,63 +233,38 @@ progressBar.addEventListener('mouseleave', () => {
 });
 
 // Theme Switcher Functions
-loadSavedTheme();
-
-// Toggle theme panel
 themeToggle.addEventListener('click', (e) => {
     e.stopPropagation();
     themePanel.classList.toggle('show');
 });
 
-// Hide theme panel when clicking outside
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.theme-switcher')) {
         themePanel.classList.remove('show');
     }
 });
 
-// Color theme selection
 colorOptions.forEach(option => {
     option.addEventListener('click', () => {
         const theme = option.dataset.theme;
-        
-        // Remove all theme classes
         document.body.classList.remove('theme-green', 'theme-blue', 'theme-purple', 'theme-red', 'theme-orange', 'theme-pink');
-        
-        // Add selected theme
         document.body.classList.add(`theme-${theme}`);
-        
-        // Update active state
         setActiveColor(theme);
-        
-        // Save to localStorage
         localStorage.setItem('theme', theme);
     });
 });
 
-// Dark/Light mode selection
 modeButtons.forEach(button => {
     button.addEventListener('click', () => {
         const mode = button.dataset.mode;
-        
-        // Remove both modes
         document.body.classList.remove('dark-mode', 'light-mode');
-        
-        // Add selected mode
         document.body.classList.add(`${mode}-mode`);
-        
-        // Update active state
         setActiveMode(mode);
-        
-        // Save to localStorage
         localStorage.setItem('mode', mode);
-        
-        // Update icon
         updateThemeToggleIcon();
     });
 });
 
-// Helper functions
 function setActiveColor(theme) {
     colorOptions.forEach(option => {
         option.classList.remove('active');
@@ -329,7 +288,6 @@ function updateThemeToggleIcon() {
     themeToggle.textContent = isLightMode ? '☀️' : '🎨';
 }
 
-// Auto hide unlock overlay after 10 seconds if user doesn't interact
 setTimeout(() => {
     if (!isMusicUnlocked) {
         unlockMusicBtn.style.animation = 'pulse 1s infinite';
@@ -343,9 +301,10 @@ const discordUsername = document.getElementById('discordUsername');
 const statusDot = document.getElementById('statusDot');
 const statusText = document.getElementById('statusText');
 
-// Set initial status
-statusDot.className = 'status-dot offline';
-statusText.textContent = 'Đang tải...';
+if (statusDot && statusText) {
+    statusDot.className = 'status-dot offline';
+    statusText.textContent = 'Đang tải...';
+}
 
 async function updateDiscordStatus() {
     try {
@@ -359,8 +318,8 @@ async function updateDiscordStatus() {
         const user = body.data.discord_user;
         const presence = body.data.discord_status;
 
-        discordUsername.textContent = user.username || 'Người Tình Mùa Đông';
-        discordAvatar.src = user.avatar ? `https://cdn.discordapp.com/avatars/${discordId}/${user.avatar}.png` : './images/discord-avatar.png';
+        if (discordUsername) discordUsername.textContent = user.username || 'Người Tình Mùa Đông';
+        if (discordAvatar) discordAvatar.src = user.avatar ? `https://cdn.discordapp.com/avatars/${discordId}/${user.avatar}.png` : './images/discord-avatar.png';
 
         let statusClass = 'offline';
         let statusName = 'Offline';
@@ -376,9 +335,8 @@ async function updateDiscordStatus() {
             statusName = 'Do Not Disturb';
         }
 
-        statusDot.className = `status-dot ${statusClass}`;
+        if (statusDot) statusDot.className = `status-dot ${statusClass}`;
 
-        //  tên game/activity 
         let activityName = '';
         if (body.data.activities && body.data.activities.length > 0) {
             const spotify = body.data.activities.find(a => a.name === 'Spotify');
@@ -397,13 +355,76 @@ async function updateDiscordStatus() {
             }
         }
 
-        statusText.textContent = `Status: ${statusName}${activityName}`;
+        if (statusText) statusText.textContent = `Status: ${statusName}${activityName}`;
     } catch (err) {
-        statusDot.className = 'status-dot offline';
-        statusText.textContent = 'Status: Không lấy được status';
+        if (statusDot) statusDot.className = 'status-dot offline';
+        if (statusText) statusText.textContent = 'Status: Không lấy được status';
         console.error('Discord status fetch failed:', err);
     }
 }
 
 updateDiscordStatus();
 setInterval(updateDiscordStatus, 60000);
+
+// rain / snow
+function createWeatherEffect(type = 'rain', count = 35) {
+    let container = document.getElementById('weather-container');
+
+    if (type === 'off') {
+        if (container) container.remove();
+        return;
+    }
+
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'weather-container';
+        document.body.appendChild(container);
+    }
+
+    container.innerHTML = '';
+
+    for (let i = 0; i < count; i++) {
+        const drop = document.createElement('div');
+        drop.classList.add('drop', type);
+
+        drop.style.left = Math.random() * 100 + 'vw';
+
+        const duration = type === 'rain'
+            ? Math.random() * 0.7 + 0.8
+            : Math.random() * 3 + 3;
+
+        drop.style.animationDuration = duration + 's';
+        drop.style.animationDelay = Math.random() * 2 + 's';
+
+        if (type === 'snow') {
+            const size = Math.random() * 4 + 3;
+            drop.style.width = size + 'px';
+            drop.style.height = size + 'px';
+            drop.style.opacity = Math.random() * 0.7 + 0.3;
+        }
+
+        container.appendChild(drop);
+    }
+}
+
+function setActiveWeatherBtn(weatherType) {
+    const weatherBtns = document.querySelectorAll('.weather-btn');
+    weatherBtns.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.weather === weatherType) {
+            btn.classList.add('active');
+        }
+    });
+}
+
+document.querySelectorAll('.weather-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const weather = btn.dataset.weather;
+        createWeatherEffect(weather);
+        setActiveWeatherBtn(weather);
+        localStorage.setItem('weather', weather);
+    });
+});
+
+// Theme & Weather
+loadSavedTheme();
