@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +20,6 @@
             object-fit: cover;
         }
 
-        /**/
         .discord-avatar-small {
             height: 44px;
             width: 44px;
@@ -37,12 +37,6 @@
             display: flex;
             align-items: center;
             gap: 6px;
-        }
-
-        .discord-username-small {
-            font-size: 12px;
-            font-weight: 600;
-            color: #fff;
         }
 
         .discord-status-wrapper {
@@ -108,8 +102,15 @@
         }
 
         @keyframes statusPulse {
-            0%, 100% { box-shadow: 0 0 10px var(--status-color, rgba(67, 181, 129, 0.8)), inset 0 0 5px rgba(255, 255, 255, 0.4); }
-            50% { box-shadow: 0 0 20px var(--status-color, rgba(67, 181, 129, 1)), inset 0 0 5px rgba(255, 255, 255, 0.6); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px var(--status-color, rgba(67, 181, 129, 0.8)), inset 0 0 5px rgba(255, 255, 255, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 20px var(--status-color, rgba(67, 181, 129, 1)), inset 0 0 5px rgba(255, 255, 255, 0.6);
+            }
         }
 
         .status-text {
@@ -119,13 +120,14 @@
         }
     </style>
 </head>
+
 <body class="theme-green dark-mode">
     <div class="background">
         <video autoplay muted loop playsinline id="bgVideo">
             <source src="./images/background.mp4" type="video/mp4">
         </video>
     </div>
-    
+
     <div class="overlay"></div>
 
     <div class="autoplay-unlock" id="autoplayUnlock">
@@ -166,7 +168,7 @@
     <div class="container" id="mainContainer">
         <div id="home" class="section active">
             <div class="card">
-                <h2>Welcome to my portfolio</h2>
+                <h2>Welcome to mnhutzt</h2>
                 <p>Chào mừng bạn đến với trang web của tui. Tui là một người yêu thích sáng tạo và công nghệ!</p>
             </div>
         </div>
@@ -186,7 +188,7 @@
             <div class="card">
                 <h2>My Skills</h2>
                 <ul>
-                    <li>PYTHON 15%</li>
+                    <li>PYTHON 10%</li>
                     <li>Web Design & UX/UI 10%</li>
                 </ul>
             </div>
@@ -205,12 +207,14 @@
         <div id="contact" class="section">
             <div class="card">
                 <h2>Get In Touch</h2>
-                <p>Kết nối với tui tại đây:</p>
+                <p>Hãy kết nối với tui tại đây:</p>
                 <div class="social-buttons">
-                    <a href="https://discord.com/users/1066597531951300658" target="_blank" class="social-btn discord click-effect">
+                    <a href="https://discord.com/users/1066597531951300658" target="_blank"
+                        class="social-btn discord click-effect">
                         💜 Discord
                     </a>
-                    <a href="https://www.roblox.com/users/3571024369/profile" target="_blank" class="social-btn roblox click-effect">
+                    <a href="https://www.roblox.com/users/3571024369/profile" target="_blank"
+                        class="social-btn roblox click-effect">
                         🎮 Roblox
                     </a>
                     <a href="https://www.facebook.com/mnhutzt" target="_blank" class="social-btn facebook click-effect">
@@ -236,7 +240,8 @@
             <div style="position: relative;">
                 <button class="player-btn click-effect" id="volumeBtn">🔊</button>
                 <div class="volume-control" id="volumeControl">
-                    <input type="range" id="volumeSlider" class="volume-slider click-effect" min="0" max="100" value="70">
+                    <input type="range" id="volumeSlider" class="volume-slider click-effect" min="0" max="100"
+                        value="70">
                 </div>
             </div>
         </div>
@@ -244,26 +249,34 @@
     </div>
 
     <div class="theme-switcher">
-        <button class="theme-toggle click-effect" id="themeToggle">
-            🎨
-        </button>
+        <button class="theme-toggle click-effect" id="themeToggle">🎨</button>
         <div class="theme-panel" id="themePanel">
-            <div class="theme-title">Chọn Theme</div>
+            <div class="theme-title">Màu giao diện</div>
             <div class="theme-colors">
-                <div class="color-option theme-green active" data-theme="green" style="background: #1DB954;"></div>
-                <div class="color-option theme-blue" data-theme="blue" style="background: #007bff;"></div>
-                <div class="color-option theme-purple" data-theme="purple" style="background: #8a2be2;"></div>
-                <div class="color-option theme-red" data-theme="red" style="background: #ff4757;"></div>
-                <div class="color-option theme-orange" data-theme="orange" style="background: #ff7f00;"></div>
-                <div class="color-option theme-pink" data-theme="pink" style="background: #ff6b8b;"></div>
+                <div class="color-option active" data-theme="green" style="background: #1DB954;"></div>
+                <div class="color-option" data-theme="blue" style="background: #007bff;"></div>
+                <div class="color-option" data-theme="purple" style="background: #8a2be2;"></div>
+                <div class="color-option" data-theme="red" style="background: #ff4757;"></div>
+                <div class="color-option" data-theme="orange" style="background: #ff7f00;"></div>
+                <div class="color-option" data-theme="pink" style="background: #ff6b8b;"></div>
             </div>
+
+            <div class="theme-title">Chế độ</div>
             <div class="theme-mode">
-                <button class="mode-btn active" data-mode="dark">🌙 Dark</button>
-                <button class="mode-btn" data-mode="light">☀️ Light</button>
+                <button class="mode-btn active" data-mode="dark">Dark</button>
+                <button class="mode-btn" data-mode="light">Light</button>
+            </div>
+
+            <div class="theme-title">Hiệu ứng</div>
+            <div class="weather-options">
+                <button class="weather-btn active" data-weather="rain">🌧️ Mưa</button>
+                <button class="weather-btn" data-weather="snow">❄️ Tuyết</button>
+                <button class="weather-btn" data-weather="off">🚫 Tắt</button>
             </div>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
