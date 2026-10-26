@@ -4,7 +4,9 @@
    ============================================================ */
 
 /* --- CSS Reset & Base --- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -22,7 +24,7 @@ html {
     --primary-glow: rgba(29, 185, 84, 0.42);
     --primary-light: rgba(29, 185, 84, 0.12);
     --primary-surface: rgba(29, 185, 84, 0.06);
-    
+
     /* Crystal Glass Materials */
     --card-bg: rgba(8, 12, 24, 0.36);
     --card-bg-hover: rgba(14, 20, 38, 0.48);
@@ -30,20 +32,20 @@ html {
     --card-border-hover: rgba(255, 255, 255, 0.28);
     --item-bg: rgba(255, 255, 255, 0.045);
     --item-bg-hover: rgba(255, 255, 255, 0.085);
-    --glass-blur: blur(28px) saturate(200%) contrast(104%);
-    
+    --glass-blur: blur(20px) saturate(160%);
+
     /* Shadows & Specular Highlights */
     --shadow-main: 0 24px 60px rgba(0, 0, 0, 0.45), inset 0 1px 1px 0 rgba(255, 255, 255, 0.28);
     --shadow-hover: 0 32px 80px rgba(0, 0, 0, 0.55), inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
     --shadow-glow: 0 0 40px var(--primary-glow);
-    
+
     /* Typography Tokens */
     --text-main: #ffffff;
     --text-muted: rgba(241, 245, 249, 0.82);
     --text-dim: rgba(203, 213, 225, 0.52);
     --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
-    
+
     /* Layout Constants */
     --container-max-w: 980px;
     --radius-sm: 12px;
@@ -51,16 +53,50 @@ html {
     --radius-lg: 24px;
     --radius-xl: 32px;
     --radius-full: 9999px;
-    --transition-fast: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
-    --transition-smooth: all 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-fast: transform 0.22s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.22s ease, border-color 0.22s ease, color 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
+    --transition-smooth: transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.3s ease, opacity 0.25s ease;
 }
 
 /* Color Palettes */
-body.theme-blue { --primary-color: #00d2ff; --primary-rgb: 0, 210, 255; --primary-glow: rgba(0, 210, 255, 0.42); --primary-light: rgba(0, 210, 255, 0.12); --primary-surface: rgba(0, 210, 255, 0.06); }
-body.theme-purple { --primary-color: #a855f7; --primary-rgb: 168, 85, 247; --primary-glow: rgba(168, 85, 247, 0.42); --primary-light: rgba(168, 85, 247, 0.12); --primary-surface: rgba(168, 85, 247, 0.06); }
-body.theme-red { --primary-color: #ff3366; --primary-rgb: 255, 51, 102; --primary-glow: rgba(255, 51, 102, 0.42); --primary-light: rgba(255, 51, 102, 0.12); --primary-surface: rgba(255, 51, 102, 0.06); }
-body.theme-orange { --primary-color: #ff9900; --primary-rgb: 255, 153, 0; --primary-glow: rgba(255, 153, 0, 0.42); --primary-light: rgba(255, 153, 0, 0.12); --primary-surface: rgba(255, 153, 0, 0.06); }
-body.theme-pink { --primary-color: #ff66cc; --primary-rgb: 255, 102, 204; --primary-glow: rgba(255, 102, 204, 0.42); --primary-light: rgba(255, 102, 204, 0.12); --primary-surface: rgba(255, 102, 204, 0.06); }
+body.theme-blue {
+    --primary-color: #00d2ff;
+    --primary-rgb: 0, 210, 255;
+    --primary-glow: rgba(0, 210, 255, 0.42);
+    --primary-light: rgba(0, 210, 255, 0.12);
+    --primary-surface: rgba(0, 210, 255, 0.06);
+}
+
+body.theme-purple {
+    --primary-color: #a855f7;
+    --primary-rgb: 168, 85, 247;
+    --primary-glow: rgba(168, 85, 247, 0.42);
+    --primary-light: rgba(168, 85, 247, 0.12);
+    --primary-surface: rgba(168, 85, 247, 0.06);
+}
+
+body.theme-red {
+    --primary-color: #ff3366;
+    --primary-rgb: 255, 51, 102;
+    --primary-glow: rgba(255, 51, 102, 0.42);
+    --primary-light: rgba(255, 51, 102, 0.12);
+    --primary-surface: rgba(255, 51, 102, 0.06);
+}
+
+body.theme-orange {
+    --primary-color: #ff9900;
+    --primary-rgb: 255, 153, 0;
+    --primary-glow: rgba(255, 153, 0, 0.42);
+    --primary-light: rgba(255, 153, 0, 0.12);
+    --primary-surface: rgba(255, 153, 0, 0.06);
+}
+
+body.theme-pink {
+    --primary-color: #ff66cc;
+    --primary-rgb: 255, 102, 204;
+    --primary-glow: rgba(255, 102, 204, 0.42);
+    --primary-light: rgba(255, 102, 204, 0.12);
+    --primary-surface: rgba(255, 102, 204, 0.06);
+}
 
 /* Light Mode Overrides */
 body.light-mode {
@@ -89,10 +125,22 @@ body {
 }
 
 /* Custom Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.18); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
 
 /* ============================================================
    BACKGROUND & WEATHER CANVAS
@@ -115,13 +163,13 @@ body {
     height: auto;
     transform: translate(-50%, -50%);
     object-fit: cover;
-    filter: brightness(0.9) contrast(1.06);
+    will-change: transform;
 }
 
 .bg-gradient-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 25%, rgba(3, 7, 16, 0.12) 0%, rgba(2, 4, 10, 0.55) 100%);
+    background: radial-gradient(circle at 50% 25%, rgba(3, 7, 16, 0.22) 0%, rgba(2, 4, 10, 0.6) 100%);
 }
 
 body.light-mode .bg-gradient-overlay {
@@ -175,6 +223,14 @@ body.light-mode .bg-gradient-overlay {
     box-shadow: var(--shadow-hover);
 }
 
+/* Thẻ kính nằm trong thẻ kính: không làm mờ nền thêm lần nữa (rất tốn, hầu như không khác biệt) */
+.content-card .glass-panel,
+.bento-hero-card .glass-panel {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.05);
+}
+
 /* Metallic Gradient Heading */
 .gradient-text {
     background: linear-gradient(135deg, #ffffff 20%, var(--primary-color) 100%);
@@ -221,8 +277,15 @@ body.light-mode .bg-gradient-overlay {
 }
 
 @keyframes welcomeIn {
-    from { opacity: 0; transform: scale(0.86) translateY(28px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
+    from {
+        opacity: 0;
+        transform: scale(0.86) translateY(28px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 .welcome-avatar-wrap {
@@ -254,8 +317,15 @@ body.light-mode .bg-gradient-overlay {
 }
 
 @keyframes welcomeRing {
-    0% { transform: scale(0.88); opacity: 0.6; }
-    100% { transform: scale(1.4); opacity: 0; }
+    0% {
+        transform: scale(0.88);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
 }
 
 .welcome-badge {
@@ -341,8 +411,15 @@ body.light-mode .bg-gradient-overlay {
 }
 
 @keyframes navDrop {
-    from { opacity: 0; transform: translateY(-26px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-26px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .brand {
@@ -451,8 +528,15 @@ body.light-mode .bg-gradient-overlay {
 }
 
 @keyframes humanTabFade {
-    0% { opacity: 0; transform: scale(0.98) translateY(8px); }
-    100% { opacity: 1; transform: scale(1) translateY(0); }
+    0% {
+        opacity: 0;
+        transform: scale(0.98) translateY(8px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 /* --- Home Bento Grid --- */
@@ -514,8 +598,15 @@ body.light-mode .bg-gradient-overlay {
 }
 
 @keyframes glowPulse {
-    0% { opacity: 0.45; transform: scale(0.92); }
-    100% { opacity: 0.95; transform: scale(1.1); }
+    0% {
+        opacity: 0.45;
+        transform: scale(0.92);
+    }
+
+    100% {
+        opacity: 0.95;
+        transform: scale(1.1);
+    }
 }
 
 .online-indicator {
@@ -746,10 +837,24 @@ body.light-mode .bg-gradient-overlay {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.discord-status-ring.online { border-color: #43B581; box-shadow: 0 0 12px rgba(67, 181, 129, 0.85); }
-.discord-status-ring.idle { border-color: #FAA61A; box-shadow: 0 0 12px rgba(250, 166, 26, 0.85); }
-.discord-status-ring.dnd { border-color: #F04747; box-shadow: 0 0 12px rgba(240, 71, 71, 0.85); }
-.discord-status-ring.offline { border-color: #747F8D; }
+.discord-status-ring.online {
+    border-color: #43B581;
+    box-shadow: 0 0 12px rgba(67, 181, 129, 0.85);
+}
+
+.discord-status-ring.idle {
+    border-color: #FAA61A;
+    box-shadow: 0 0 12px rgba(250, 166, 26, 0.85);
+}
+
+.discord-status-ring.dnd {
+    border-color: #F04747;
+    box-shadow: 0 0 12px rgba(240, 71, 71, 0.85);
+}
+
+.discord-status-ring.offline {
+    border-color: #747F8D;
+}
 
 .d-status-dot-badge {
     position: absolute;
@@ -763,9 +868,20 @@ body.light-mode .bg-gradient-overlay {
     background: #747F8D;
 }
 
-.status-dot.online { background: #43B581; box-shadow: 0 0 8px #43B581; }
-.status-dot.idle { background: #FAA61A; box-shadow: 0 0 8px #FAA61A; }
-.status-dot.dnd { background: #F04747; box-shadow: 0 0 8px #F04747; }
+.status-dot.online {
+    background: #43B581;
+    box-shadow: 0 0 8px #43B581;
+}
+
+.status-dot.idle {
+    background: #FAA61A;
+    box-shadow: 0 0 8px #FAA61A;
+}
+
+.status-dot.dnd {
+    background: #F04747;
+    box-shadow: 0 0 8px #F04747;
+}
 
 .d-profile-meta {
     display: flex;
@@ -1369,14 +1485,35 @@ body.light-mode .bg-gradient-overlay {
     color: #fff;
 }
 
-.discord-card .contact-icon-box { background: #5865F2; box-shadow: 0 4px 18px rgba(88, 101, 242, 0.4); }
-.discord-card:hover { background: rgba(88, 101, 242, 0.12) !important; border-color: rgba(88, 101, 242, 0.4) !important; }
+.discord-card .contact-icon-box {
+    background: #5865F2;
+    box-shadow: 0 4px 18px rgba(88, 101, 242, 0.4);
+}
 
-.facebook-card .contact-icon-box { background: #1877F2; box-shadow: 0 4px 18px rgba(24, 119, 242, 0.4); }
-.facebook-card:hover { background: rgba(24, 119, 242, 0.12) !important; border-color: rgba(24, 119, 242, 0.4) !important; }
+.discord-card:hover {
+    background: rgba(88, 101, 242, 0.12) !important;
+    border-color: rgba(88, 101, 242, 0.4) !important;
+}
 
-.roblox-card .contact-icon-box { background: #e2231a; box-shadow: 0 4px 18px rgba(226, 35, 26, 0.4); }
-.roblox-card:hover { background: rgba(226, 35, 26, 0.12) !important; border-color: rgba(226, 35, 26, 0.4) !important; }
+.facebook-card .contact-icon-box {
+    background: #1877F2;
+    box-shadow: 0 4px 18px rgba(24, 119, 242, 0.4);
+}
+
+.facebook-card:hover {
+    background: rgba(24, 119, 242, 0.12) !important;
+    border-color: rgba(24, 119, 242, 0.4) !important;
+}
+
+.roblox-card .contact-icon-box {
+    background: #e2231a;
+    box-shadow: 0 4px 18px rgba(226, 35, 26, 0.4);
+}
+
+.roblox-card:hover {
+    background: rgba(226, 35, 26, 0.12) !important;
+    border-color: rgba(226, 35, 26, 0.4) !important;
+}
 
 /* --- Music Player --- */
 .music-player {
@@ -1395,8 +1532,15 @@ body.light-mode .bg-gradient-overlay {
 }
 
 @keyframes playerSlideIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .player-top {
@@ -1420,7 +1564,9 @@ body.light-mode .bg-gradient-overlay {
 }
 
 @keyframes vinylSpin {
-    100% { transform: rotate(360deg); }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .track-meta {
@@ -1458,14 +1604,30 @@ body.light-mode .bg-gradient-overlay {
     border-radius: 2px;
 }
 
-.audio-waves.playing .wave-bar:nth-child(1) { animation: wavePulse 0.8s infinite alternate; }
-.audio-waves.playing .wave-bar:nth-child(2) { animation: wavePulse 0.6s infinite alternate 0.2s; }
-.audio-waves.playing .wave-bar:nth-child(3) { animation: wavePulse 0.9s infinite alternate 0.4s; }
-.audio-waves.playing .wave-bar:nth-child(4) { animation: wavePulse 0.7s infinite alternate 0.1s; }
+.audio-waves.playing .wave-bar:nth-child(1) {
+    animation: wavePulse 0.8s infinite alternate;
+}
+
+.audio-waves.playing .wave-bar:nth-child(2) {
+    animation: wavePulse 0.6s infinite alternate 0.2s;
+}
+
+.audio-waves.playing .wave-bar:nth-child(3) {
+    animation: wavePulse 0.9s infinite alternate 0.4s;
+}
+
+.audio-waves.playing .wave-bar:nth-child(4) {
+    animation: wavePulse 0.7s infinite alternate 0.1s;
+}
 
 @keyframes wavePulse {
-    0% { height: 3px; }
-    100% { height: 16px; }
+    0% {
+        height: 3px;
+    }
+
+    100% {
+        height: 16px;
+    }
 }
 
 .player-progress-area {
@@ -1593,8 +1755,15 @@ body.light-mode .bg-gradient-overlay {
 }
 
 @keyframes popoverFadeIn {
-    from { opacity: 0; transform: translate(-50%, 10px) scale(0.9); }
-    to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+    from {
+        opacity: 0;
+        transform: translate(-50%, 10px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+    }
 }
 
 .volume-percent-badge {
@@ -1648,6 +1817,9 @@ body.light-mode .bg-gradient-overlay {
     bottom: 24px;
     left: 24px;
     z-index: 90;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .theme-toggle {
@@ -1673,6 +1845,60 @@ body.light-mode .bg-gradient-overlay {
     box-shadow: 0 0 25px var(--primary-glow);
 }
 
+/* Bagua Button next to Theme Toggle */
+.bagua-toggle {
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.bagua-toggle:hover {
+    transform: scale(1.12);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 25px var(--primary-glow);
+}
+
+.bagua-toggle .bagua-svg {
+    width: 34px;
+    height: 34px;
+    display: block;
+    transform-origin: 50% 50%;
+    transition: transform 0.4s ease;
+}
+
+.bagua-toggle .bagua-taiji {
+    transform-origin: 50px 50px;
+    transition: filter 0.5s ease;
+}
+
+.bagua-toggle:hover .bagua-svg {
+    animation: baguaSpin 3.2s linear infinite;
+}
+
+.bagua-toggle:hover .bagua-taiji {
+    animation: yinYangSwap 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes baguaSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes yinYangSwap {
+    0% {
+        filter: invert(0);
+    }
+
+    100% {
+        filter: invert(1);
+    }
+}
+
 .theme-panel {
     position: absolute;
     bottom: 60px;
@@ -1689,8 +1915,15 @@ body.light-mode .bg-gradient-overlay {
 }
 
 @keyframes studioPop {
-    from { opacity: 0; transform: scale(0.94) translateY(8px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
+    from {
+        opacity: 0;
+        transform: scale(0.94) translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 .panel-header {
@@ -1746,13 +1979,15 @@ body.light-mode .bg-gradient-overlay {
     box-shadow: 0 0 14px var(--c);
 }
 
-.mode-toggle-group, .weather-toggle-group {
+.mode-toggle-group,
+.weather-toggle-group {
     display: flex;
     gap: 6px;
     flex-wrap: wrap;
 }
 
-.mode-btn, .weather-btn {
+.mode-btn,
+.weather-btn {
     flex: 1;
     padding: 7px 10px;
     border-radius: 10px;
@@ -1770,12 +2005,14 @@ body.light-mode .bg-gradient-overlay {
     transition: var(--transition-fast);
 }
 
-.mode-btn:hover, .weather-btn:hover {
+.mode-btn:hover,
+.weather-btn:hover {
     background: rgba(255, 255, 255, 0.12);
     color: #fff;
 }
 
-.mode-btn.active, .weather-btn.active {
+.mode-btn.active,
+.weather-btn.active {
     background: var(--primary-light);
     border-color: var(--primary-glow);
     color: var(--primary-color);
@@ -1787,25 +2024,31 @@ body.light-mode .bg-gradient-overlay {
     .home-bento-grid {
         grid-template-columns: 1fr;
     }
+
     .skills-container {
         grid-template-columns: 1fr;
     }
+
     .about-bento-grid {
         grid-template-columns: 1fr;
     }
+
     .bento-main {
         grid-column: span 1;
     }
+
     .projects-grid {
         grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 768px) {
+
     /* Layout & Spacing */
     .container {
         margin: 68px auto 20px;
-        padding: 0 14px 150px; /* Safe clearance for floating music player */
+        padding: 0 14px 150px;
+        /* Safe clearance for floating music player */
     }
 
     /* Top Capsule Header */
@@ -2021,6 +2264,11 @@ body.light-mode .bg-gradient-overlay {
         font-size: 15px;
     }
 
+    .theme-toggle .bagua-svg {
+        width: 28px;
+        height: 28px;
+    }
+
     .theme-panel {
         bottom: 48px;
         left: 0;
@@ -2054,7 +2302,8 @@ body.light-mode .bg-gradient-overlay {
         margin-bottom: 20px;
     }
 
-    .welcome-btn, .welcome-skip-btn {
+    .welcome-btn,
+    .welcome-skip-btn {
         padding: 12px 18px;
         font-size: 13.5px;
     }
@@ -2099,7 +2348,8 @@ body.light-mode .bg-gradient-overlay {
         flex-wrap: wrap;
     }
 
-    .project-btn, .project-btn-sub {
+    .project-btn,
+    .project-btn-sub {
         flex: 1;
         min-width: 120px;
     }
@@ -2149,5 +2399,747 @@ body.light-mode .bg-gradient-overlay {
 
     .section-title {
         font-size: 20px;
+    }
+}
+
+/* ==========================================================================
+   3D Bát Quái Trận (Bagua Formation 3D Modal & Scene)
+   ========================================================================== */
+.bagua-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s;
+}
+
+.bagua-modal.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.bagua-backdrop {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(6, 12, 22, 0.38) 0%, rgba(2, 4, 8, 0.62) 85%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: pointer;
+}
+
+.bagua-dialog {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+    max-height: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px 20px;
+    pointer-events: none;
+    user-select: none;
+}
+
+.bagua-dialog>* {
+    pointer-events: auto;
+}
+
+/* Close button */
+.bagua-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(18, 24, 36, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 10;
+}
+
+.bagua-close:hover {
+    background: rgba(239, 68, 68, 0.25);
+    border-color: #ef4444;
+    color: #ef4444;
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+}
+
+/* 3D Scene Viewport */
+.bagua-scene-container {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1200px;
+    overflow: visible;
+}
+
+/* Lunar / Mist Halo behind center */
+.bagua-celestial-pillar {
+    position: absolute;
+    width: min(520px, 92vw);
+    height: min(520px, 92vw);
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.12) 0%, rgba(220, 235, 255, 0.04) 45%, transparent 72%);
+    pointer-events: none;
+    animation: pillarPulse 5s ease-in-out infinite alternate;
+}
+
+@keyframes pillarPulse {
+    0% {
+        opacity: 0.5;
+        transform: scale(0.92);
+    }
+
+    100% {
+        opacity: 0.9;
+        transform: scale(1.1);
+    }
+}
+
+/* Front-facing 3D Stage */
+.bagua-3d-stage {
+    position: relative;
+    width: min(540px, 92vw);
+    height: min(540px, 92vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ==========================================================================
+   Bát Quái La Bàn Trận Đồ (Daoist Luo Pan Array - Authentic Multi-Dial System)
+   ========================================================================== */
+.bagua-luopan-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ambient Array Aura Halo */
+.luopan-halo-back {
+    position: absolute;
+    inset: -35px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.17) 0%, rgba(210, 235, 255, 0.06) 45%, transparent 72%);
+    pointer-events: none;
+    animation: luopanAuraBreath 6s ease-in-out infinite alternate;
+}
+
+@keyframes luopanAuraBreath {
+    0% {
+        opacity: 0.6;
+        transform: scale(0.94);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1.06);
+    }
+}
+
+/* Mặt phẳng trận đồ: phẳng, hướng thẳng ra màn hình */
+.luopan-ring-plane {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+/* Mỗi vòng là một SVG riêng. Vòng được xoay bằng chính thẻ <svg> (GPU) thay vì xoay bên trong SVG => mượt hơn nhiều */
+.luopan-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Các vòng đồng tâm, mỗi vòng quay phẳng trước mặt */
+/* Chỉ chạy khi mở trận: các vòng bung ra lần lượt từ trong ra ngoài rồi tự quay phẳng trước mặt */
+.bagua-modal.active .luopan-layer-tuong {
+    animation: ringIntro 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0s both,
+        luopanSpinClockwise 26s linear infinite;
+}
+
+.bagua-modal.active .luopan-layer-trigrams {
+    animation: ringIntro 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both,
+        luopanSpinCounter 32s linear infinite;
+}
+
+.bagua-modal.active .luopan-layer-mountains {
+    animation: ringIntro 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both,
+        luopanSpinClockwise 48s linear infinite;
+}
+
+.bagua-modal.active .luopan-layer-celestial {
+    animation: ringIntro 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.46s both,
+        luopanSpinCounter 72s linear infinite;
+}
+
+.bagua-modal.active .luopan-layer-frame {
+    animation: ringIntro 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.64s both;
+}
+
+@keyframes ringIntro {
+    from {
+        scale: 0.15;
+        opacity: 0;
+    }
+
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+}
+
+/* Thái Cực Âm Dương: tấm biển đứng, KHÔNG nghiêng - luôn nhìn thẳng ra màn hình */
+.luopan-taiji-billboard {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 118px;
+    height: 118px;
+    margin: -59px 0 0 -59px;
+    /* hạt nhân đứng yên ở tâm, các quỹ đạo quay quanh */
+    pointer-events: none;
+}
+
+/* Vùng bấm hình tròn đúng cỡ Thái Cực (thẻ SVG xoay nên hộp của nó là hình vuông xoay) */
+.luopan-taiji-hit {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    pointer-events: auto;
+    cursor: pointer;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Hạt nhân bật sáng khi trận mở */
+.bagua-modal.active .luopan-taiji-billboard {
+    animation: taijiIntro 1.3s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+}
+
+@keyframes taijiIntro {
+    0% {
+        scale: 0;
+        opacity: 0;
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        scale: 1;
+        opacity: 1;
+    }
+}
+
+/* Hào quang thở quanh hạt nhân */
+.luopan-taiji-billboard::before {
+    content: "";
+    position: absolute;
+    inset: -45%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.34) 0%, rgba(200, 225, 255, 0.1) 38%, transparent 68%);
+    pointer-events: none;
+    animation: taijiAura 3.6s ease-in-out infinite alternate;
+}
+
+@keyframes taijiAura {
+    from {
+        opacity: 0.55;
+        scale: 0.9;
+    }
+
+    to {
+        opacity: 1;
+        scale: 1.12;
+    }
+}
+
+/* Sóng xung thứ hai, lệch pha với sóng thứ nhất */
+.luopan-taiji-billboard::after {
+    content: "";
+    position: absolute;
+    top: 8.5%;
+    left: 8.5%;
+    width: 83%;
+    height: 83%;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    pointer-events: none;
+    animation: luopanPulse 2.8s ease-out 1.4s infinite;
+}
+
+/* Sóng xung mạnh khi chạm vào hạt nhân */
+/* Vùng tròn để kéo xoay các vòng */
+.luopan-drag-zone {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    cursor: grab;
+    touch-action: none;
+    pointer-events: auto;
+}
+
+.bagua-3d-stage.is-dragging .luopan-drag-zone {
+    cursor: grabbing;
+}
+
+/* Gợi ý thao tác: hiện lên nhẹ rồi tự mờ đi */
+.luopan-hint {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 14px;
+    white-space: normal;
+    text-align: center;
+    width: max-content;
+    max-width: 92vw;
+    line-height: 1.7;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    color: rgba(255, 255, 255, 0.6);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+    pointer-events: none;
+    opacity: 0;
+}
+
+.bagua-modal.active .luopan-hint {
+    animation: luopanHint 7s ease 2s both;
+}
+
+@keyframes luopanHint {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 6px);
+    }
+
+    12% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, 0);
+    }
+}
+
+.luopan-taiji-svg {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+    animation: luopanSpinClockwise 20s linear infinite;
+    transition: scale 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+}
+
+.luopan-taiji-billboard:hover .luopan-taiji-svg {
+    scale: 1.07;
+}
+
+/* Concentric Dials & Keyframe Animations */
+.luopan-dial {
+    transform-origin: 300px 300px;
+}
+
+@keyframes luopanSpinClockwise {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes luopanSpinCounter {
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+/* Typography on Luo Pan Dials */
+.luopan-text-celestial {
+    font-family: 'Ma Shan Zheng', 'STKaiti', 'Cinzel', serif;
+    font-size: 11px;
+    fill: rgba(255, 255, 255, 0.88);
+    font-weight: 500;
+    text-anchor: middle;
+    dominant-baseline: central;
+    letter-spacing: 0.5px;
+    paint-order: stroke;
+    stroke: rgba(255, 255, 255, 0.16);
+    stroke-width: 2px;
+    stroke-linejoin: round;
+}
+
+.luopan-text-mountain {
+    font-family: 'Ma Shan Zheng', 'STKaiti', 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: bold;
+    fill: #ffffff;
+    text-anchor: middle;
+    dominant-baseline: central;
+    paint-order: stroke;
+    stroke: rgba(255, 255, 255, 0.22);
+    stroke-width: 2.4px;
+    stroke-linejoin: round;
+}
+
+.luopan-text-trigram {
+    font-family: 'Ma Shan Zheng', 'STKaiti', 'Cinzel', serif;
+    font-size: 15.5px;
+    font-weight: bold;
+    fill: #ffffff;
+    text-anchor: middle;
+    dominant-baseline: central;
+    paint-order: stroke;
+    stroke: rgba(255, 255, 255, 0.28);
+    stroke-width: 2.6px;
+    stroke-linejoin: round;
+}
+
+.luopan-text-tuong {
+    font-family: 'Ma Shan Zheng', 'STKaiti', 'Cinzel', serif;
+    font-size: 11.5px;
+    font-weight: bold;
+    fill: currentColor;
+    text-anchor: middle;
+    dominant-baseline: central;
+    letter-spacing: 1px;
+    paint-order: stroke;
+    stroke: rgba(255, 255, 255, 0.2);
+    stroke-width: 2.2px;
+    stroke-linejoin: round;
+}
+
+/* Central Taiji Pulse Halo */
+.luopan-center-pulse {
+    position: absolute;
+    top: 8.5%;
+    left: 8.5%;
+    width: 83%;
+    height: 83%;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
+    pointer-events: none;
+    animation: luopanPulse 2.8s ease-out infinite;
+}
+
+@keyframes luopanPulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.85;
+    }
+
+    100% {
+        transform: scale(1.65);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   Full-Screen Floating Characters (Màu trắng đục & trong suốt bay khắp màn hình)
+   ========================================================================== */
+.bagua-floating-glyphs {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 2;
+}
+
+/* 1. Orbiting Characters (Xoay vòng cung rộng quanh Bát Quái) */
+.glyph-orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-family: 'Ma Shan Zheng', 'STKaiti', serif;
+    font-size: var(--sz, 22px);
+    color: var(--col, rgba(255, 255, 255, 0.75));
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+    white-space: nowrap;
+    opacity: var(--op, 0.7);
+    animation: orbitFrontGlyph var(--dur, 24s) linear infinite;
+    animation-delay: var(--del, 0s);
+    user-select: none;
+    will-change: transform;
+}
+
+@keyframes orbitFrontGlyph {
+    0% {
+        transform: rotateZ(var(--init-rot, 0deg)) translateY(var(--rad, 240px)) rotateZ(calc(-1 * var(--init-rot, 0deg)));
+    }
+
+    100% {
+        transform: rotateZ(calc(var(--init-rot, 0deg) + 360deg)) translateY(var(--rad, 240px)) rotateZ(calc(-1 * (var(--init-rot, 0deg) + 360deg)));
+    }
+}
+
+/* 2. Full-Screen Drifting Mist Characters (Bay lượn sương khói khắp toàn màn hình) */
+.glyph-screen-drift {
+    position: absolute;
+    font-family: 'Ma Shan Zheng', 'STKaiti', serif;
+    font-size: var(--sz, 24px);
+    color: var(--col, rgba(255, 255, 255, 0.65));
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.35);
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+    opacity: 0;
+    left: var(--left, 50%);
+    bottom: -60px;
+    will-change: transform, opacity;
+    animation: fullScreenMistDrift var(--dur, 18s) cubic-bezier(0.25, 0.7, 0.4, 1) infinite;
+    animation-delay: var(--del, 0s);
+}
+
+@keyframes fullScreenMistDrift {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0) scale(0.8) rotate(var(--rot, 0deg));
+    }
+
+    15% {
+        opacity: var(--max-op, 0.75);
+    }
+
+    75% {
+        opacity: var(--max-op, 0.75);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(var(--drift-x, 40px), calc(-100vh - 120px), 0) scale(1.1) rotate(calc(var(--rot, 0deg) + var(--rot-drift, 20deg)));
+    }
+}
+
+
+/* ==========================================================================
+   Hiệu ứng tương tác nâng cao
+   ========================================================================== */
+
+/* Vệt sáng quét quanh dải vòng, nhanh/sáng hơn khi bạn xoay vòng */
+.luopan-sweep {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.35;
+    background: conic-gradient(from 0deg,
+            rgba(255, 255, 255, 0) 0deg,
+            rgba(255, 255, 255, 0) 235deg,
+            rgba(255, 255, 255, 0.10) 300deg,
+            rgba(255, 255, 255, 0.55) 358deg,
+            rgba(255, 255, 255, 0) 360deg);
+    -webkit-mask-image: radial-gradient(circle closest-side, transparent 24%, #000 29%, #000 91%, transparent 95%);
+    mask-image: radial-gradient(circle closest-side, transparent 24%, #000 29%, #000 91%, transparent 95%);
+    will-change: transform, opacity;
+}
+
+.bagua-modal.active .luopan-sweep {
+    animation: luopanSpinClockwise 10s linear infinite;
+}
+
+/* Tên vòng hiện phía trên trận đồ */
+.luopan-caption {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    margin-bottom: 12px;
+    white-space: nowrap;
+    font-family: 'Ma Shan Zheng', 'STKaiti', 'Cinzel', serif;
+    font-size: 17px;
+    letter-spacing: 0.16em;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 0 14px rgba(255, 255, 255, 0.55);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luopan-caption.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Nạp lực: giữ Thái Cực */
+.luopan-charge {
+    position: absolute;
+    inset: -55%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(var(--qi, 255, 255, 255), 0.8) 0%, rgba(var(--qi, 255, 255, 255), 0.26) 32%, transparent 62%);
+    pointer-events: none;
+    opacity: 0;
+    scale: 0.5;
+}
+
+.luopan-taiji-billboard.is-charging .luopan-charge {
+    will-change: opacity, transform;
+}
+
+.luopan-taiji-billboard.is-charging .luopan-taiji-svg {
+    transition: none;
+}
+
+
+/* Canvas hiệu ứng linh khí (vệt bút, xoáy hút, nổ phá cảnh) */
+.bagua-fx {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+}
+
+/* Ấn chữ cổ đóng xuống khi phá cảnh */
+.luopan-seal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 320px;
+    height: 320px;
+    margin: -160px 0 0 -160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Ma Shan Zheng', 'STKaiti', 'KaiTi', serif;
+    font-size: 250px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.94);
+    text-shadow: 0 0 26px rgba(var(--qi, 255, 255, 255), 0.95), 0 0 90px rgba(var(--qi, 255, 255, 255), 0.5);
+    pointer-events: none;
+    opacity: 0;
+    z-index: 3;
+}
+
+
+/* ==========================================================================
+   Hiệu năng: khi mở trận đồ, mọi animation của trang phía sau được tạm dừng
+   (nền kính mờ phía sau không phải làm mờ lại mỗi khung hình)
+   ========================================================================== */
+html.bagua-open *,
+html.bagua-open *::before,
+html.bagua-open *::after {
+    animation-play-state: paused !important;
+}
+
+html.bagua-open .bagua-modal,
+html.bagua-open .bagua-modal *,
+html.bagua-open .bagua-modal *::before,
+html.bagua-open .bagua-modal *::after {
+    animation-play-state: running !important;
+}
+
+/* Máy yếu (tự phát hiện): bỏ lớp kính mờ + các chi tiết phụ */
+html.bagua-lite .bagua-backdrop {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(3, 6, 12, 0.86);
+}
+
+html.bagua-lite .luopan-sweep,
+html.bagua-lite .glyph-screen-drift,
+html.bagua-lite .luopan-halo-back {
+    display: none;
+}
+
+
+/* Tên vòng đổi sắc theo từng vòng */
+.bagua-3d-stage[data-ring="tuong"] .luopan-caption {
+    color: rgb(255, 214, 196);
+    text-shadow: 0 0 16px rgba(255, 190, 160, 0.75);
+}
+
+.bagua-3d-stage[data-ring="trigrams"] .luopan-caption {
+    color: rgb(255, 234, 184);
+    text-shadow: 0 0 16px rgba(255, 226, 160, 0.75);
+}
+
+.bagua-3d-stage[data-ring="mountains"] .luopan-caption {
+    color: rgb(194, 238, 255);
+    text-shadow: 0 0 16px rgba(170, 228, 255, 0.75);
+}
+
+.bagua-3d-stage[data-ring="celestial"] .luopan-caption {
+    color: rgb(226, 216, 255);
+    text-shadow: 0 0 16px rgba(214, 200, 255, 0.75);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .bagua-dialog {
+        padding: 16px 12px;
+    }
+
+    .bagua-close {
+        top: 14px;
+        right: 14px;
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+
+    .bagua-3d-stage {
+        width: min(360px, 92vw);
+        height: min(360px, 92vw);
+    }
+
+    .luopan-taiji-billboard {
+        width: 79px;
+        height: 79px;
+        margin: -39.5px 0 0 -39.5px;
     }
 }
