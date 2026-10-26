@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Ma+Shan+Zheng&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
         rel="stylesheet">
 
     <!-- Font Awesome Icons -->
@@ -522,6 +522,87 @@
             <i class="fa-solid fa-wand-magic-sparkles"></i>
         </button>
 
+        <button class="theme-toggle bagua-toggle click-effect" id="baguaToggle" title="Càn Khôn Bát Quái Trận (3D)">
+            <svg class="bagua-svg" viewBox="0 0 100 100" width="34" height="34" xmlns="http://www.w3.org/2000/svg">
+                <!-- Vành ngoài Bát Quái -->
+                <circle cx="50" cy="50" r="47.5" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.85" />
+                <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="0.8"
+                    stroke-dasharray="1.5 2" opacity="0.5" />
+                <circle cx="50" cy="50" r="26.5" fill="none" stroke="currentColor" stroke-width="1" opacity="0.6" />
+
+                <!-- 8 Quẻ Bát Quái (Tiên Thiên) -->
+                <!-- 1. Càn ☰ (0°) -->
+                <g transform="rotate(0 50 50)" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <line x1="43" y1="7.5" x2="57" y2="7.5" />
+                    <line x1="43" y1="12" x2="57" y2="12" />
+                    <line x1="43" y1="16.5" x2="57" y2="16.5" />
+                </g>
+                <!-- 2. Đoài ☱ (45°) -->
+                <g transform="rotate(45 50 50)" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <line x1="43" y1="7.5" x2="48.5" y2="7.5" />
+                    <line x1="51.5" y1="7.5" x2="57" y2="7.5" />
+                    <line x1="43" y1="12" x2="57" y2="12" />
+                    <line x1="43" y1="16.5" x2="57" y2="16.5" />
+                </g>
+                <!-- 3. Ly ☲ (90°) -->
+                <g transform="rotate(90 50 50)" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <line x1="43" y1="7.5" x2="57" y2="7.5" />
+                    <line x1="43" y1="12" x2="48.5" y2="12" />
+                    <line x1="51.5" y1="12" x2="57" y2="12" />
+                    <line x1="43" y1="16.5" x2="57" y2="16.5" />
+                </g>
+                <!-- 4. Chấn ☳ (135°) -->
+                <g transform="rotate(135 50 50)" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <line x1="43" y1="7.5" x2="48.5" y2="7.5" />
+                    <line x1="51.5" y1="7.5" x2="57" y2="7.5" />
+                    <line x1="43" y1="12" x2="48.5" y2="12" />
+                    <line x1="51.5" y1="12" x2="57" y2="12" />
+                    <line x1="43" y1="16.5" x2="57" y2="16.5" />
+                </g>
+                <!-- 5. Khôn ☷ (180°) -->
+                <g transform="rotate(180 50 50)" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <line x1="43" y1="7.5" x2="48.5" y2="7.5" />
+                    <line x1="51.5" y1="7.5" x2="57" y2="7.5" />
+                    <line x1="43" y1="12" x2="48.5" y2="12" />
+                    <line x1="51.5" y1="12" x2="57" y2="12" />
+                    <line x1="43" y1="16.5" x2="48.5" y2="16.5" />
+                    <line x1="51.5" y1="16.5" x2="57" y2="16.5" />
+                </g>
+                <!-- 6. Cấn ☶ (225°) -->
+                <g transform="rotate(225 50 50)" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <line x1="43" y1="7.5" x2="57" y2="7.5" />
+                    <line x1="43" y1="12" x2="48.5" y2="12" />
+                    <line x1="51.5" y1="12" x2="57" y2="12" />
+                    <line x1="43" y1="16.5" x2="48.5" y2="16.5" />
+                    <line x1="51.5" y1="16.5" x2="57" y2="16.5" />
+                </g>
+                <!-- 7. Khảm ☵ (270°) -->
+                <g transform="rotate(270 50 50)" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <line x1="43" y1="7.5" x2="48.5" y2="7.5" />
+                    <line x1="51.5" y1="7.5" x2="57" y2="7.5" />
+                    <line x1="43" y1="12" x2="57" y2="12" />
+                    <line x1="43" y1="16.5" x2="48.5" y2="16.5" />
+                    <line x1="51.5" y1="16.5" x2="57" y2="16.5" />
+                </g>
+                <!-- 8. Tốn ☴ (315°) -->
+                <g transform="rotate(315 50 50)" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <line x1="43" y1="7.5" x2="57" y2="7.5" />
+                    <line x1="43" y1="12" x2="57" y2="12" />
+                    <line x1="43" y1="16.5" x2="48.5" y2="16.5" />
+                    <line x1="51.5" y1="16.5" x2="57" y2="16.5" />
+                </g>
+
+                <!-- Thái Cực Âm Dương Đồ (Taiji) -->
+                <g class="bagua-taiji">
+                    <circle cx="50" cy="50" r="24" fill="#f5f7fa" />
+                    <path d="M 50 26 A 24 24 0 0 1 50 74 A 12 12 0 0 1 50 50 A 12 12 0 0 0 50 26 Z" fill="#0d1117" />
+                    <circle cx="50" cy="62" r="3.2" fill="#f5f7fa" />
+                    <circle cx="50" cy="38" r="3.2" fill="#0d1117" />
+                    <circle cx="50" cy="50" r="24" fill="none" stroke="currentColor" stroke-width="1" opacity="0.7" />
+                </g>
+            </svg>
+        </button>
+
         <div class="theme-panel glass-panel" id="themePanel">
             <div class="panel-header">
                 <span><i class="fa-solid fa-sliders"></i> Tùy Chỉnh Giao Diện</span>
@@ -556,6 +637,518 @@
                     <button class="weather-btn" data-weather="snow"><i class="fa-regular fa-snowflake"></i>
                         Tuyết</button>
                     <button class="weather-btn" data-weather="off"><i class="fa-solid fa-ban"></i> Tắt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3D Bát Quái Trận (Bagua Formation 3D Modal) -->
+    <div class="bagua-modal" id="baguaModal" aria-hidden="true">
+        <div class="bagua-backdrop" id="baguaBackdrop"></div>
+
+        <!-- Full-Screen Floating & Orbiting Chinese Glyphs Container -->
+        <div class="bagua-floating-glyphs" id="baguaFloatingGlyphs"></div>
+
+        <div class="bagua-dialog">
+            <!-- Close Button -->
+            <button class="bagua-close click-effect" id="baguaCloseBtn" title="Thu hồi Bát Quái Trận (ESC)">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- 3D Viewport Scene -->
+            <div class="bagua-scene-container" id="baguaSceneContainer">
+                <!-- Celestial Vertical Aura Light Column -->
+                <div class="bagua-celestial-pillar"></div>
+
+                <!-- 3D Rotating Array Stage -->
+                <div class="bagua-3d-stage" id="baguaStage">
+                    <!-- Bát Quái La Bàn Trận Đồ (Daoist Luo Pan Array) -->
+                    <div class="bagua-luopan-wrapper">
+                        <!-- Ambient Array Aura Halo -->
+                        <div class="luopan-halo-back"></div>
+
+                        <!-- Vùng kéo để xoay các vòng bằng tay -->
+                        <div class="luopan-drag-zone" id="luopanDragZone"></div>
+
+                        <!-- Vệt sáng quét quanh trận đồ (mạnh lên theo tốc độ xoay) -->
+                        <div class="luopan-sweep" id="luopanSweep"></div>
+
+
+
+                        <!-- MẶT PHẲNG TRẬN ĐỒ (nghiêng 3D, xếp tầng theo trục Z) -->
+                        <div class="luopan-ring-plane">
+
+                            <!-- Tầng 0 (đáy): khung tĩnh + vành độ số + định nghĩa dùng chung -->
+                            <svg class="luopan-layer luopan-layer-frame" viewBox="0 0 600 600"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <!-- Filter for subtle celestial glow -->
+                                    <filter id="luopan-glow" x="-20%" y="-20%" width="140%" height="140%">
+                                        <feGaussianBlur stdDeviation="3" result="blur" />
+                                        <feMerge>
+                                            <feMergeNode in="blur" />
+                                            <feMergeNode in="SourceGraphic" />
+                                        </feMerge>
+                                    </filter>
+
+                                    <!-- Reusable Trigram Bars -->
+                                    <!-- Dương Hào (Yang Bar - Solid) -->
+                                    <line id="bar-yang" x1="-15" y1="0" x2="15" y2="0" stroke="rgba(255,255,255,0.92)"
+                                        stroke-width="3" stroke-linecap="round" />
+
+                                    <!-- Âm Hào (Yin Bar - Broken) -->
+                                    <g id="bar-yin">
+                                        <line x1="-15" y1="0" x2="-3.5" y2="0" stroke="rgba(255,255,255,0.92)"
+                                            stroke-width="3" stroke-linecap="round" />
+                                        <line x1="3.5" y1="0" x2="15" y2="0" stroke="rgba(255,255,255,0.92)"
+                                            stroke-width="3" stroke-linecap="round" />
+                                    </g>
+
+                                    <!-- Hào rộng cho vòng Tứ Tượng (màu theo currentColor) -->
+                                    <line id="bar-yang-w" x1="-19" y1="0" x2="19" y2="0" stroke="currentColor"
+                                        stroke-width="3.2" stroke-linecap="round" />
+                                    <g id="bar-yin-w">
+                                        <line x1="-19" y1="0" x2="-4" y2="0" stroke="currentColor" stroke-width="3.2"
+                                            stroke-linecap="round" />
+                                        <line x1="4" y1="0" x2="19" y2="0" stroke="currentColor" stroke-width="3.2"
+                                            stroke-linecap="round" />
+                                    </g>
+                                </defs>
+
+                                <g class="luopan-static-rings">
+                                    <!-- Outer boundary halo circles -->
+                                    <circle cx="300" cy="300" r="294" fill="none" stroke="rgba(255,255,255,0.12)"
+                                        stroke-width="1.2" stroke-dasharray="6 6" />
+                                    <circle cx="300" cy="300" r="286" fill="rgba(6, 12, 22, 0.12)"
+                                        stroke="rgba(255,255,255,0.4)" stroke-width="1.2" />
+
+                                    <!-- Degree Calibration Ticks (Vành độ số thiên văn) -->
+                                    <circle cx="300" cy="300" r="280" fill="none" stroke="rgba(255,255,255,0.65)"
+                                        stroke-width="4" stroke-dasharray="1.5 3.73" />
+                                    <circle cx="300" cy="300" r="274" fill="none" stroke="rgba(255,255,255,0.8)"
+                                        stroke-width="2.2" filter="url(#luopan-glow)" />
+                                </g>
+                            </svg>
+
+                            <!-- Tầng 1: Vòng Chu Thiên (ngược chiều kim đồng hồ) -->
+                            <svg class="luopan-layer luopan-layer-celestial" viewBox="0 0 600 600"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g class="luopan-dial luopan-dial-celestial">
+                                    <circle cx="300" cy="300" r="210" fill="none" stroke="rgba(255,255,255,0.7)"
+                                        stroke-width="1.6" />
+                                    <circle cx="300" cy="300" r="205" fill="none" stroke="rgba(255,255,255,0.25)"
+                                        stroke-width="1" stroke-dasharray="3 3" />
+
+                                    <!-- 36 Radial Dividers (from r=210 y=90 to r=274 y=26) -->
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(0 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(10 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(20 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(30 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(40 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(50 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(60 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(70 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(80 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(90 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(100 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(110 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(120 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(130 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(140 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(150 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(160 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(170 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(180 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(190 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(200 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(210 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(220 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(230 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(240 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(250 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(260 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(270 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(280 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(290 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(300 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(310 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(320 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(330 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(340 300 300)" />
+                                    <line x1="300" y1="90" x2="300" y2="26" stroke="rgba(255,255,255,0.45)"
+                                        stroke-width="1" transform="rotate(350 300 300)" />
+
+                                    <!-- 36 Celestial Characters in sectors (y=58 r=242) -->
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(5 300 300)">天</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(15 300 300)">地</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(25 300 300)">玄</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(35 300 300)">黃</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(45 300 300)">宇</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(55 300 300)">宙</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(65 300 300)">洪</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(75 300 300)">荒</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(85 300 300)">日</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(95 300 300)">月</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(105 300 300)">盈</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(115 300 300)">昃</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(125 300 300)">辰</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(135 300 300)">宿</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(145 300 300)">列</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(155 300 300)">張</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(165 300 300)">寒</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(175 300 300)">來</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(185 300 300)">暑</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(195 300 300)">往</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(205 300 300)">秋</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(215 300 300)">收</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(225 300 300)">冬</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(235 300 300)">藏</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(245 300 300)">破</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(255 300 300)">廉</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(265 300 300)">武</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(275 300 300)">祿</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(285 300 300)">文</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(295 300 300)">巨</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(305 300 300)">貪</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(315 300 300)">輔</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(325 300 300)">弼</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(335 300 300)">陰</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(345 300 300)">陽</text>
+                                    <text x="300" y="58" class="luopan-text-celestial"
+                                        transform="rotate(355 300 300)">道</text>
+
+                                </g>
+                            </svg>
+
+                            <!-- Tầng 2: Vòng 24 Sơn (thuận chiều kim đồng hồ) -->
+                            <svg class="luopan-layer luopan-layer-mountains" viewBox="0 0 600 600"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g class="luopan-dial luopan-dial-mountains">
+                                    <circle cx="300" cy="300" r="202" fill="none" stroke="rgba(255,255,255,0.75)"
+                                        stroke-width="1.8" />
+                                    <circle cx="300" cy="300" r="150" fill="none" stroke="rgba(255,255,255,0.75)"
+                                        stroke-width="1.8" />
+                                    <circle cx="300" cy="300" r="145" fill="none" stroke="rgba(255,255,255,0.3)"
+                                        stroke-width="1" stroke-dasharray="2 3" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(0 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(15 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(30 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(45 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(60 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(75 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(90 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(105 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(120 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(135 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(150 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(165 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(180 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(195 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(210 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(225 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(240 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(255 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(270 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(285 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(300 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(315 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(330 300 300)" />
+                                    <line x1="300" y1="150" x2="300" y2="98" stroke="rgba(255,255,255,0.55)"
+                                        stroke-width="1.2" transform="rotate(345 300 300)" />
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(7.5 300 300)">子</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(22.5 300 300)">癸</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(37.5 300 300)">丑</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(52.5 300 300)">艮</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(67.5 300 300)">寅</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(82.5 300 300)">甲</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(97.5 300 300)">卯</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(112.5 300 300)">乙</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(127.5 300 300)">辰</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(142.5 300 300)">巽</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(157.5 300 300)">巳</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(172.5 300 300)">丙</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(187.5 300 300)">午</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(202.5 300 300)">丁</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(217.5 300 300)">未</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(232.5 300 300)">坤</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(247.5 300 300)">申</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(262.5 300 300)">庚</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(277.5 300 300)">酉</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(292.5 300 300)">辛</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(307.5 300 300)">戌</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(322.5 300 300)">乾</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(337.5 300 300)">亥</text>
+                                    <text x="300" y="124" class="luopan-text-mountain"
+                                        transform="rotate(352.5 300 300)">壬</text>
+                                </g>
+                            </svg>
+
+                            <!-- Tầng 3: Vòng Bát Quái (ngược chiều kim đồng hồ) -->
+                            <svg class="luopan-layer luopan-layer-trigrams" viewBox="0 0 600 600"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g class="luopan-dial luopan-dial-trigrams">
+                                    <circle cx="300" cy="300" r="140" fill="none" stroke="rgba(255,255,255,0.8)"
+                                        stroke-width="2" />
+                                    <circle cx="300" cy="300" r="98" fill="none" stroke="rgba(255,255,255,0.85)"
+                                        stroke-width="2" />
+                                    <line x1="300" y1="202" x2="300" y2="160" stroke="rgba(255,255,255,0.6)"
+                                        stroke-width="1.5" transform="rotate(22.5 300 300)" />
+                                    <line x1="300" y1="202" x2="300" y2="160" stroke="rgba(255,255,255,0.6)"
+                                        stroke-width="1.5" transform="rotate(67.5 300 300)" />
+                                    <line x1="300" y1="202" x2="300" y2="160" stroke="rgba(255,255,255,0.6)"
+                                        stroke-width="1.5" transform="rotate(112.5 300 300)" />
+                                    <line x1="300" y1="202" x2="300" y2="160" stroke="rgba(255,255,255,0.6)"
+                                        stroke-width="1.5" transform="rotate(157.5 300 300)" />
+                                    <line x1="300" y1="202" x2="300" y2="160" stroke="rgba(255,255,255,0.6)"
+                                        stroke-width="1.5" transform="rotate(202.5 300 300)" />
+                                    <line x1="300" y1="202" x2="300" y2="160" stroke="rgba(255,255,255,0.6)"
+                                        stroke-width="1.5" transform="rotate(247.5 300 300)" />
+                                    <line x1="300" y1="202" x2="300" y2="160" stroke="rgba(255,255,255,0.6)"
+                                        stroke-width="1.5" transform="rotate(292.5 300 300)" />
+                                    <line x1="300" y1="202" x2="300" y2="160" stroke="rgba(255,255,255,0.6)"
+                                        stroke-width="1.5" transform="rotate(337.5 300 300)" />
+                                    <g transform="rotate(0 300 300)">
+                                        <text x="300" y="172" class="luopan-text-trigram">乾</text>
+                                        <use href="#bar-yang" x="300" y="183" />
+                                        <use href="#bar-yang" x="300" y="190" />
+                                        <use href="#bar-yang" x="300" y="197" />
+                                    </g>
+                                    <g transform="rotate(45 300 300)">
+                                        <text x="300" y="172" class="luopan-text-trigram">兌</text>
+                                        <use href="#bar-yin" x="300" y="183" />
+                                        <use href="#bar-yang" x="300" y="190" />
+                                        <use href="#bar-yang" x="300" y="197" />
+                                    </g>
+                                    <g transform="rotate(90 300 300)">
+                                        <text x="300" y="172" class="luopan-text-trigram">離</text>
+                                        <use href="#bar-yang" x="300" y="183" />
+                                        <use href="#bar-yin" x="300" y="190" />
+                                        <use href="#bar-yang" x="300" y="197" />
+                                    </g>
+                                    <g transform="rotate(135 300 300)">
+                                        <text x="300" y="172" class="luopan-text-trigram">震</text>
+                                        <use href="#bar-yin" x="300" y="183" />
+                                        <use href="#bar-yin" x="300" y="190" />
+                                        <use href="#bar-yang" x="300" y="197" />
+                                    </g>
+                                    <g transform="rotate(180 300 300)">
+                                        <text x="300" y="172" class="luopan-text-trigram">坤</text>
+                                        <use href="#bar-yin" x="300" y="183" />
+                                        <use href="#bar-yin" x="300" y="190" />
+                                        <use href="#bar-yin" x="300" y="197" />
+                                    </g>
+                                    <g transform="rotate(225 300 300)">
+                                        <text x="300" y="172" class="luopan-text-trigram">艮</text>
+                                        <use href="#bar-yang" x="300" y="183" />
+                                        <use href="#bar-yin" x="300" y="190" />
+                                        <use href="#bar-yin" x="300" y="197" />
+                                    </g>
+                                    <g transform="rotate(270 300 300)">
+                                        <text x="300" y="172" class="luopan-text-trigram">坎</text>
+                                        <use href="#bar-yin" x="300" y="183" />
+                                        <use href="#bar-yang" x="300" y="190" />
+                                        <use href="#bar-yin" x="300" y="197" />
+                                    </g>
+                                    <g transform="rotate(315 300 300)">
+                                        <text x="300" y="172" class="luopan-text-trigram">巽</text>
+                                        <use href="#bar-yang" x="300" y="183" />
+                                        <use href="#bar-yang" x="300" y="190" />
+                                        <use href="#bar-yin" x="300" y="197" />
+                                    </g>
+                                </g>
+                            </svg>
+
+                            <!-- Tầng 4: Vòng Tứ Tượng (thuận chiều kim đồng hồ) -->
+                            <svg class="luopan-layer luopan-layer-tuong" viewBox="0 0 600 600"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g class="luopan-dial luopan-dial-tuong">
+                                    <circle cx="300" cy="300" r="92" fill="none" stroke="rgba(255,255,255,0.8)"
+                                        stroke-width="1.8" />
+                                    <circle cx="300" cy="300" r="50" fill="none" stroke="rgba(255,255,255,0.8)"
+                                        stroke-width="1.6" />
+                                    <line x1="300" y1="250" x2="300" y2="208" stroke="rgba(255,255,255,0.6)"
+                                        stroke-width="1.4" transform="rotate(67.5 300 300)" />
+                                    <line x1="300" y1="250" x2="300" y2="208" stroke="rgba(255,255,255,0.6)"
+                                        stroke-width="1.4" transform="rotate(157.5 300 300)" />
+                                    <line x1="300" y1="250" x2="300" y2="208" stroke="rgba(255,255,255,0.6)"
+                                        stroke-width="1.4" transform="rotate(247.5 300 300)" />
+                                    <line x1="300" y1="250" x2="300" y2="208" stroke="rgba(255,255,255,0.6)"
+                                        stroke-width="1.4" transform="rotate(337.5 300 300)" />
+                                    <g transform="rotate(22.5 300 300)" style="color:rgb(255,214,180)">
+                                        <text x="300" y="220" class="luopan-text-tuong">太陽</text>
+                                        <use href="#bar-yang-w" x="300" y="236" />
+                                        <use href="#bar-yang-w" x="300" y="243" />
+                                    </g>
+                                    <g transform="rotate(112.5 300 300)" style="color:rgb(226,208,255)">
+                                        <text x="300" y="220" class="luopan-text-tuong">少陰</text>
+                                        <use href="#bar-yin-w" x="300" y="236" />
+                                        <use href="#bar-yang-w" x="300" y="243" />
+                                    </g>
+                                    <g transform="rotate(202.5 300 300)" style="color:rgb(180,208,255)">
+                                        <text x="300" y="220" class="luopan-text-tuong">太陰</text>
+                                        <use href="#bar-yin-w" x="300" y="236" />
+                                        <use href="#bar-yin-w" x="300" y="243" />
+                                    </g>
+                                    <g transform="rotate(292.5 300 300)" style="color:rgb(190,248,216)">
+                                        <text x="300" y="220" class="luopan-text-tuong">少陽</text>
+                                        <use href="#bar-yang-w" x="300" y="236" />
+                                        <use href="#bar-yin-w" x="300" y="243" />
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+
+                        <!-- THÁI CỰC ÂM DƯƠNG: luôn hướng thẳng về phía người xem (không nghiêng theo trận đồ) -->
+                        <div class="luopan-taiji-billboard">
+                            <div class="luopan-charge"></div>
+                            <div class="luopan-center-pulse"></div>
+                            <svg class="luopan-taiji-svg" viewBox="200 200 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <g class="luopan-dial luopan-dial-taiji">
+                                    <!-- Outer Taiji Rim -->
+                                    <circle cx="300" cy="300" r="70" fill="#f8fafc" stroke="rgba(255,255,255,0.95)"
+                                        stroke-width="2.5" filter="url(#luopan-glow)" />
+
+                                    <!-- S-Curve Yin Obsidian Half -->
+                                    <path
+                                        d="M 300 230 A 70 70 0 0 1 300 370 A 35 35 0 0 1 300 300 A 35 35 0 0 0 300 230 Z"
+                                        fill="#080c14" />
+
+                                    <!-- Yang Eye (White in Yin) -->
+                                    <circle cx="300" cy="335" r="9" fill="#f8fafc" />
+
+                                    <!-- Yin Eye (Black in Yang) -->
+                                    <circle cx="300" cy="265" r="9" fill="#080c14" />
+
+                                    <!-- Inner decorative concentric hair-line -->
+                                    <circle cx="300" cy="300" r="70" fill="none" stroke="rgba(255,255,255,0.7)"
+                                        stroke-width="1.5" />
+                                </g>
+                            </svg>
+                            <div class="luopan-taiji-hit"></div>
+                        </div>
+
+                        <!-- Ấn chữ hiện ra khi phá cảnh -->
+                        <div class="luopan-seal" id="luopanSeal" aria-hidden="true"></div>
+                    </div>
+                    <div class="luopan-caption" id="luopanCaption"></div>
+                    <div class="luopan-hint">Kéo để xoay vòng &nbsp;·&nbsp; Rê vào Tứ Tượng để cộng hưởng Bát Quái
+                        &nbsp;·&nbsp; Chạm vòng để thi pháp &nbsp;·&nbsp; Giữ Thái Cực để tu luyện</div>
                 </div>
             </div>
         </div>
